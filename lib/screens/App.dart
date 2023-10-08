@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bagagem_smart/screens/Login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -7,7 +8,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: Login(),
     );
   }
@@ -16,6 +16,7 @@ class App extends StatelessWidget {
 class HomePage extends StatelessWidget {
 
   const HomePage({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {

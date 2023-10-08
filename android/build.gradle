@@ -8,7 +8,9 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.google.firebase:firebase-core:16.0.9"
+//        classpath "com.google.firebase:firebase-core:16.0.9"
+        classpath "androidx.multidex:multidex:2.0.1"
+        classpath 'com.google.gms:google-services:4.3.15'
     }
 }
 

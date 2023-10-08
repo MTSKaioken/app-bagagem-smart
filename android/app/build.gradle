@@ -22,6 +22,8 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     namespace "br.com.unip.tcc.bagagem_smart"
     compileSdkVersion flutter.compileSdkVersion
@@ -54,4 +56,7 @@ android {
 
 flutter {
     source '../..'
+}
+
+dependencies {
 }

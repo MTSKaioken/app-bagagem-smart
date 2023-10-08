@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:bagagem_smart/screens/Dashboard.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -46,7 +48,8 @@ class Login extends StatelessWidget {
                       labelText: 'Senha',
                       border: OutlineInputBorder(),
                       suffixIcon: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                        },
                         icon: const Icon(Icons.visibility),
                       )),
                 ),
@@ -56,7 +59,19 @@ class Login extends StatelessWidget {
                 ),
                 ElevatedButton(
                   child: Text('login'),
-                  onPressed: () {},
+                  onPressed: () {
+                    var db = FirebaseFirestore.instance;
+                    final user = <String, dynamic>{
+                      "first": "Alan",
+                      "middle": "Mathison",
+                      "last": "Turing",
+                      "born": 1912
+                    };
+
+// Add a new document with a generated ID
+                    db.collection("users").add(user).then((DocumentReference doc) =>
+                        print('DocumentSnapshot added with ID: ${doc.id}'));
+                  },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.all(20.0),
                     fixedSize: Size(400, 70),
