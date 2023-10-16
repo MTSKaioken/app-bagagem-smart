@@ -1,10 +1,10 @@
 import 'package:bagagem_smart/screens/Dashboard.dart';
+import 'package:bagagem_smart/screens/RecuperacaoConta.dart';
+import 'package:bagagem_smart/screens/NavbarLateral.dart';
 import 'package:bagagem_smart/screens/Login.dart';
-import 'package:flutter/material.dart';
-
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class AcessDB extends StatelessWidget {
   @override
@@ -15,16 +15,18 @@ class AcessDB extends StatelessWidget {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return Login();
+          return Dashboard();
         }
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return Login();
+          // return Login();
+          return Dashboard();
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return Login();
+        // return Login();
+        return Dashboard();
       },
     );
   }
