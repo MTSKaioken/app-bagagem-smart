@@ -11,7 +11,6 @@ class RecuperacaoConta extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bagagem Smart',
       home: Scaffold(
-        drawer: NavbarLateral(),
         appBar: AppBar(
           title: Text(
             'Recuperar a senha',
