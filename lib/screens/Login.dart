@@ -1,8 +1,6 @@
 import 'package:bagagem_smart/components/CampoSenha.dart';
 import 'package:flutter/material.dart';
 
-import 'NavbarLateral.dart';
-
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -12,7 +10,6 @@ class Login extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bagagem Smart',
       home: Scaffold(
-        drawer: NavbarLateral(),
         appBar: AppBar(
           title: Text(
             'Login',
@@ -29,9 +26,9 @@ class Login extends StatelessWidget {
                 TextField(
                   controller: null,
                   decoration: InputDecoration(
-                      labelText: 'Email',
-                      border: OutlineInputBorder(),
-                      ),
+                    labelText: 'Email',
+                    border: OutlineInputBorder(),
+                  ),
                 ),
                 Container(
                   alignment: Alignment.bottomCenter,
