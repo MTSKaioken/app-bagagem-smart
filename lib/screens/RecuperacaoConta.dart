@@ -12,6 +12,12 @@ class RecuperacaoConta extends StatelessWidget {
       title: 'Bagagem Smart',
       home: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
           title: Text(
             'Recuperar a senha',
             textDirection: TextDirection.ltr,
