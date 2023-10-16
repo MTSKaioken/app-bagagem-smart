@@ -1,9 +1,7 @@
-import 'dart:ui';
-
-import 'package:bagagem_smart/screens/Dashboard.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:bagagem_smart/components/CampoSenha.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'NavbarLateral.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -14,6 +12,7 @@ class Login extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bagagem Smart',
       home: Scaffold(
+        drawer: NavbarLateral(),
         appBar: AppBar(
           title: Text(
             'Login',
@@ -32,26 +31,14 @@ class Login extends StatelessWidget {
                   decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.visibility_off),
-                      )),
+                      ),
                 ),
                 Container(
                   alignment: Alignment.bottomCenter,
                   margin: EdgeInsets.only(top: 24),
                 ),
-                TextField(
-                  controller: null,
-                  obscureText: true, // variavel em cima do icon para alternar
-                  decoration: InputDecoration(
-                      labelText: 'Senha',
-                      border: OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                        },
-                        icon: const Icon(Icons.visibility),
-                      )),
+                Center(
+                  child: CampoSenha(),
                 ),
                 Container(
                   alignment: Alignment.bottomCenter,
@@ -60,17 +47,16 @@ class Login extends StatelessWidget {
                 ElevatedButton(
                   child: Text('login'),
                   onPressed: () {
-                    var db = FirebaseFirestore.instance;
-                    final user = <String, dynamic>{
-                      "first": "Alan",
-                      "middle": "Mathison",
-                      "last": "Turing",
-                      "born": 1912
-                    };
-
+                    // var db = FirebaseFirestore.instance;
+                    // final user = <String, dynamic>{
+                    //   "first": "Alan",
+                    //   "middle": "Mathison",
+                    //   "last": "Turing",
+                    //   "born": 1912
+                    // };
 // Add a new document with a generated ID
-                    db.collection("users").add(user).then((DocumentReference doc) =>
-                        print('DocumentSnapshot added with ID: ${doc.id}'));
+//                     db.collection("users").add(user).then((DocumentReference doc) =>
+//                         print('DocumentSnapshot added with ID: ${doc.id}'));
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.all(20.0),
