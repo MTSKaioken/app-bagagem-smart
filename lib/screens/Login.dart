@@ -65,7 +65,12 @@ class Login extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
-                Text('Esqueceu a senha?'),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/recuperacao');
+                  },
+                    child: Text('Esqueceu a senha?'),
+                ),
               ],
             )),
       ),
