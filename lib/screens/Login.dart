@@ -11,6 +11,12 @@ class Login extends StatelessWidget {
       title: 'Bagagem Smart',
       home: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
           title: Text(
             'Login',
             textDirection: TextDirection.ltr,
@@ -66,10 +72,10 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushNamed(context, '/recuperacao');
                   },
-                    child: Text('Esqueceu a senha?'),
+                  child: Text('Esqueceu a senha?'),
                 ),
               ],
             )),
