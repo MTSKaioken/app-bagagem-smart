@@ -42,28 +42,11 @@ class HomePage extends StatelessWidget {
               margin: EdgeInsets.only(top: 20),
             ),
             ElevatedButton(
-              child: Row(
-                children: [
-                Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle, // Define a forma como círculo
-                    color: Colors.white, // Cor do fundo
-                  ),
-                  padding: EdgeInsets.all(20),
-                  child: Icon(
-                    Icons.mail_sharp, // Ícone
-                    size: 10, // Tamanho do ícone
-                    color: Colors.black, // Cor do ícone
-                  ),
+              child: Text(
+                'Entrar',
+                style: TextStyle(
+                  color: Colors.white,
                 ),
-
-                  Text(
-                    'Entrar',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
               ),
               onPressed: () {
                 Navigator.pushNamed(context, '/login');
@@ -84,7 +67,9 @@ class HomePage extends StatelessWidget {
             ElevatedButton(
               child: Text(
                 'Cadastre-se',
-                style: TextStyle(color: Colors.black,),
+                style: TextStyle(
+                  color: Colors.black,
+                ),
               ),
               onPressed: () {
                 Navigator.pushNamed(context, '/login');
