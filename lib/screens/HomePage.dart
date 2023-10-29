@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -8,16 +9,28 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Container(
-              alignment: Alignment.bottomCenter,
-              margin: EdgeInsets.only(top: 150),
+            OrientationLayoutBuilder(
+              portrait: (context) => Container(
+                alignment: Alignment.bottomCenter,
+                margin: EdgeInsets.only(top: 150),
+              ),
+              landscape: (context) => Container(
+                alignment: Alignment.bottomCenter,
+                margin: EdgeInsets.only(top: 5),
+              ),
             ),
             Image.network(
                 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_200x200.png',
                 width: 125),
-            Container(
-              alignment: Alignment.bottomCenter,
-              margin: EdgeInsets.only(top: 20),
+            OrientationLayoutBuilder(
+              portrait: (context) => Container(
+                alignment: Alignment.bottomCenter,
+                margin: EdgeInsets.only(top: 20),
+              ),
+              landscape: (context) => Container(
+                alignment: Alignment.bottomCenter,
+                margin: EdgeInsets.only(top: 0),
+              ),
             ),
             Text('Malas Smart',
                 style: TextStyle(
@@ -25,9 +38,15 @@ class HomePage extends StatelessWidget {
                   fontSize: 26.3,
                   color: Colors.black,
                 )),
-            Container(
-              alignment: Alignment.bottomCenter,
-              margin: EdgeInsets.only(top: 150),
+            OrientationLayoutBuilder(
+              portrait: (context) => Container(
+                alignment: Alignment.bottomCenter,
+                margin: EdgeInsets.only(top: 150),
+              ),
+              landscape: (context) => Container(
+                alignment: Alignment.bottomCenter,
+                margin: EdgeInsets.only(top: 20),
+              ),
             ),
             Text(
               'Login',
@@ -37,9 +56,15 @@ class HomePage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            Container(
-              alignment: Alignment.bottomCenter,
-              margin: EdgeInsets.only(top: 20),
+            OrientationLayoutBuilder(
+              portrait: (context) => Container(
+                alignment: Alignment.bottomCenter,
+                margin: EdgeInsets.only(top: 20),
+              ),
+              landscape: (context) => Container(
+                alignment: Alignment.bottomCenter,
+                margin: EdgeInsets.only(top: 0),
+              ),
             ),
             ElevatedButton(
               child: Text(
@@ -60,9 +85,15 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(35)),
               ),
             ),
-            Container(
-              alignment: Alignment.bottomCenter,
-              margin: EdgeInsets.only(top: 20),
+            OrientationLayoutBuilder(
+              portrait: (context) => Container(
+                alignment: Alignment.bottomCenter,
+                margin: EdgeInsets.only(top: 20),
+              ),
+              landscape: (context) => Container(
+                alignment: Alignment.bottomCenter,
+                margin: EdgeInsets.only(top: 5),
+              ),
             ),
             ElevatedButton(
               child: Text(
@@ -72,7 +103,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                Navigator.pushNamed(context, '/cadastro');
               },
               style: ElevatedButton.styleFrom(
                 side: BorderSide(

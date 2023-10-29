@@ -1,8 +1,10 @@
 import 'package:bagagem_smart/components/CampoSenha.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+import '../components/ProfileImagePicker.dart';
+
+class Cadastro extends StatelessWidget {
+  const Cadastro({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +20,30 @@ class Login extends StatelessWidget {
             },
           ),
           title: Text(
-            'Login',
+            'Cadastro',
             textDirection: TextDirection.ltr,
           ),
           backgroundColor: Colors.black87,
         ),
-        body: Container(
+        body: SingleChildScrollView(
+          child: Container(
             alignment: Alignment.topCenter,
             margin: EdgeInsets.only(left: 30, right: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                ProfileImagePicker(),
+                TextField(
+                  controller: null,
+                  decoration: InputDecoration(
+                    labelText: 'Nome',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(top: 24),
+                ),
                 TextField(
                   controller: null,
                   decoration: InputDecoration(
@@ -47,11 +62,17 @@ class Login extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   margin: EdgeInsets.only(top: 24),
                 ),
+                Center(
+                  child: CampoSenha(),
+                ),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(top: 24),
+                ),
                 ElevatedButton(
-                  child: Text('login'),
+                  child: Text('Cadastrar'),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/dashboard');
-                    // todo logar
+                    // todo cadastrar
                     // var db = FirebaseFirestore.instance;
                     // final user = <String, dynamic>{
                     //   "first": "Alan",
@@ -73,14 +94,8 @@ class Login extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/recuperacao');
-                  },
-                  child: Text('Esqueceu a senha?'),
-                ),
               ],
-            )),
+            )), ),
       ),
     );
   }

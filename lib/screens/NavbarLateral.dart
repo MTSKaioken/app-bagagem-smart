@@ -37,7 +37,7 @@ class NavbarLateral extends StatelessWidget {
                 )),
           ),
           ListTile(
-            leading: Icon(Icons.input),
+            leading: Icon(Icons.edit_square),
             title: Text('Editar seu perfil'),
             onTap: () => {},
           ),
@@ -57,8 +57,13 @@ class NavbarLateral extends StatelessWidget {
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
+            leading: Icon(Icons.lock),
             title: Text('Política de Privacidade'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Sair'),
             onTap: () => {Navigator.of(context).pop()},
           ),
         ],
