@@ -1,3 +1,4 @@
+import 'package:bagagem_smart/components/CampoEmail.dart';
 import 'package:bagagem_smart/components/CampoSenha.dart';
 import 'package:flutter/material.dart';
 
@@ -29,13 +30,7 @@ class Login extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextField(
-                  controller: null,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
+                CampoEmail(),
                 Container(
                   alignment: Alignment.bottomCenter,
                   margin: EdgeInsets.only(top: 24),
