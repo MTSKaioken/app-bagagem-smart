@@ -13,6 +13,7 @@ class _CampoEmail extends State<CampoEmail> {
   TextEditingController _emailEditingController = TextEditingController();
   TextEditingController _senhaEditingController = TextEditingController();
   bool isPasswordVisible = false;
+  String retorno = "teste";
 
   void togglePasswordVisibility() {
     setState(() {
@@ -47,6 +48,14 @@ class _CampoEmail extends State<CampoEmail> {
     return null;
   }
 
+  void fetchAllData() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users').get();
+
+    querySnapshot.docs.forEach((doc) {
+      print(doc.data());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -70,6 +79,7 @@ class _CampoEmail extends State<CampoEmail> {
         ),
         Center(
           child: TextFormField(
+            controller: _senhaEditingController,
             obscureText: !isPasswordVisible,
             validator: _validarSenha,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -94,7 +104,7 @@ class _CampoEmail extends State<CampoEmail> {
           onPressed: () async => {
             // todo if not valid notify
             // todo logar if is valid
-
+            fetchAllData()
             // final user = <String, dynamic>{
             //   "first": "Alan",
             //   "middle": "Mathison",
@@ -117,6 +127,7 @@ class _CampoEmail extends State<CampoEmail> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
         ),
+        Text(retorno)
       ],
     );
   }
