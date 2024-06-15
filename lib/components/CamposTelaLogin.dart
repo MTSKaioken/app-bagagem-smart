@@ -4,16 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'dart:core';
 
-class CampoEmail extends StatefulWidget {
+class CamposTelaLogin extends StatefulWidget {
+
+  final BuildContext parentContext;
+
+  /* construtor */
+  CamposTelaLogin({required this.parentContext});
+  // final Function(bool) onLoginResult;
+  //
+  // CamposTelaLogin({required this.onLoginResult});
+
   @override
-  _CampoEmail createState() => _CampoEmail();
+  _CamposTelaLogin createState() => _CamposTelaLogin();
+
 }
 
-class _CampoEmail extends State<CampoEmail> {
+class _CamposTelaLogin extends State<CamposTelaLogin> {
   TextEditingController _emailEditingController = TextEditingController();
   TextEditingController _senhaEditingController = TextEditingController();
   bool isPasswordVisible = false;
-  String retorno = "teste";
 
   void togglePasswordVisibility() {
     setState(() {
@@ -37,23 +46,30 @@ class _CampoEmail extends State<CampoEmail> {
     }
   }
 
-  String? _validarSenha(String? valueField) {
-    //todo passar essa rotina para o cadastro
-    RegExp temDigito = RegExp(r'(?=.*\d)');
-    RegExp temSmallCase = RegExp(r'(?=.*[a-z])');
-    RegExp temUpperCase = RegExp(r'(?=.*[A-Z])');
-    RegExp temCaracterEspecial = RegExp(r'(?=.*[$*&@#])');
-    RegExp temOitoCaracteres = RegExp(r'[0-9a-zA-Z$*&@#]{8,}');
 
-    return null;
+  Future<void> buscarCadastro() async {
+    bool loginSuccess = false;
+
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('usuarios')
+        .where('email', isEqualTo: getEmail())
+        .where('senha', isEqualTo: getSenha())
+        .get();
+
+    var usuario = querySnapshot.docs.firstOrNull;
+    trataRetornoUsuario(usuario);
   }
 
-  void fetchAllData() async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users').get();
-
-    querySnapshot.docs.forEach((doc) {
-      print(doc.data());
-    });
+  void trataRetornoUsuario(QueryDocumentSnapshot<Object?>? usuario) {
+    if(usuario != null){
+      print("\n\nusuario encontrado");
+      Navigator.pushNamed(widget.parentContext, "/dashboard");
+    } else {
+      print("\n\nusuario não encontrado");
+      ScaffoldMessenger.of(widget.parentContext).showSnackBar(
+        SnackBar(content: Text('Login falhou. Verifique suas credenciais.')),
+      );
+    }
   }
 
   @override
@@ -100,11 +116,9 @@ class _CampoEmail extends State<CampoEmail> {
           margin: EdgeInsets.only(top: 24),
         ),
         ElevatedButton(
-          child: Text('login'),
+          child: Text('Login'),
           onPressed: () async => {
-            // todo if not valid notify
-            // todo logar if is valid
-            fetchAllData()
+            this.buscarCadastro()
             // final user = <String, dynamic>{
             //   "first": "Alan",
             //   "middle": "Mathison",
@@ -127,7 +141,6 @@ class _CampoEmail extends State<CampoEmail> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
         ),
-        Text(retorno)
       ],
     );
   }
