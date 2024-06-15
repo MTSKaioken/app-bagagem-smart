@@ -46,6 +46,10 @@ class _CamposTelaLogin extends State<CamposTelaLogin> {
     }
   }
 
+  String? _validarSenha(String? valueField) {
+    return null;
+  }
+
 
   Future<void> buscarCadastro() async {
     bool loginSuccess = false;
@@ -58,6 +62,7 @@ class _CamposTelaLogin extends State<CamposTelaLogin> {
 
     var usuario = querySnapshot.docs.firstOrNull;
     trataRetornoUsuario(usuario);
+
   }
 
   void trataRetornoUsuario(QueryDocumentSnapshot<Object?>? usuario) {
