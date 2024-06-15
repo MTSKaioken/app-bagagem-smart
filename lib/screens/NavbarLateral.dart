@@ -1,8 +1,19 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 class NavbarLateral extends StatelessWidget {
+
+  final BuildContext parentContext;
+
+  /* construtor */
+  NavbarLateral({required this.parentContext});
+
   @override
   Widget build(BuildContext context) {
+    var email = 'SeuEmail@exemplo.com.br';
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -25,7 +36,7 @@ class NavbarLateral extends StatelessWidget {
               'Seu Nome',
               style: TextStyle(color: Colors.black),
             ),
-            accountEmail: Text('SeuEmail@exemplo.com.br',
+            accountEmail: Text(email,
                 style: TextStyle(color: Colors.black)),
             decoration: BoxDecoration(
               color: Colors.transparent, // Altere aqui a cor de fundo
@@ -64,7 +75,7 @@ class NavbarLateral extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Sair'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => { Navigator.pushNamed(parentContext, "/") },
           ),
         ],
       ),

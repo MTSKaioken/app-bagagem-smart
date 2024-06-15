@@ -14,7 +14,7 @@ class Dashboard extends StatelessWidget {
           title: 'Bagagem Smart',
           home: Scaffold(
             backgroundColor: Colors.white,
-            drawer: NavbarLateral(),
+            drawer: NavbarLateral(parentContext: context),
             appBar: AppBar(
               backgroundColor: Colors.white,
               shadowColor: Colors.transparent,
