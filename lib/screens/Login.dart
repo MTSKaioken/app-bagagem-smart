@@ -1,4 +1,4 @@
-import 'package:bagagem_smart/components/CampoEmail.dart';
+import 'package:bagagem_smart/components/CamposTelaLogin.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -29,7 +29,7 @@ class Login extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CampoEmail(),
+                CamposTelaLogin(parentContext: context),
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, '/recuperacao');
