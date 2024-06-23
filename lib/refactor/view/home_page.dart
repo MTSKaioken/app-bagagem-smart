@@ -19,9 +19,9 @@ class HomePage extends StatelessWidget {
                   margin: EdgeInsets.only(top: 5),
                 ),
               ),
-              Image.network(
-                  'https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_200x200.png',
-                  width: 125),
+              Image.asset(
+                  'lib/refactor/assets/bagagem-icon-sem-bg.png',
+                  width: 200),
               OrientationLayoutBuilder(
                 portrait: (context) => Container(
                   alignment: Alignment.bottomCenter,

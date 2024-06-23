@@ -28,7 +28,7 @@ class _Balanca extends State<Balanca> {
                 backgroundColor: Colors.black54,
                 strokeAlign: 3.0,
                 strokeWidth: 15,
-                value: 0.65,
+                value: 0.75,
               ),
             ),
           ],
