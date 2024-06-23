@@ -106,7 +106,7 @@ class _Cadastro extends State<Cadastro> {
         body: SingleChildScrollView(
           child: Container(
               alignment: Alignment.topCenter,
-              margin: EdgeInsets.only(left: 30, right: 30),
+              margin: EdgeInsets.only(left: 30, right: 30, top: 30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -154,7 +154,7 @@ class _Cadastro extends State<Cadastro> {
                       controller: senhaRepetidaInputValue,
                       obscureText: !isPasswordConfirmationVisible,
                       decoration: InputDecoration(
-                          labelText: 'Senha',
+                          labelText: 'Confirmar senha',
                           border: OutlineInputBorder(),
                           suffixIcon: BtnShowHidePassword(
                               onToggle: togglePasswordConfirmation)),

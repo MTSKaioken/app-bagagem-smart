@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 import '../model/usuario.dart';
+import 'component/balanca.dart';
 import 'component/navbar_lateral.dart';
 
 class Dashboard extends StatelessWidget {
@@ -27,27 +25,20 @@ class Dashboard extends StatelessWidget {
             ),
           ),
           body: Center(
-            child: Stack(
+            child: Column(
               children: [
                 Icon(Icons.no_luggage_rounded),
                 Text('Dispositivo Conectado'),
+                // trocar por banner
+                Container(
+                  height: 150,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                  ),
+                ),
                 Container(
                   alignment: Alignment.bottomCenter,
                   margin: EdgeInsets.only(top: 0),
-                ),
-                FlutterMap(
-                  options: MapOptions(
-                    // coordenadas de casa
-                    center: LatLng(-23.60044, -46.43707),
-                    zoom: 17.0,
-                  ),
-                  children: [
-                    TileLayer(
-                      urlTemplate:
-                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                      userAgentPackageName: 'org.example.app',
-                    )
-                  ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -56,6 +47,20 @@ class Dashboard extends StatelessWidget {
                     Text('São Paulo, Brazil'),
                   ],
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Sua Bagagem',
+                       style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Balanca(),
+                  ],
+                )
               ],
             ),
           ),

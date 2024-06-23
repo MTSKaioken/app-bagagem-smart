@@ -98,7 +98,7 @@ class _Login extends State<Login> {
                           labelText: 'Email',
                           border: OutlineInputBorder(),
                         ),
-                        validator: usuarioController.validarEmail,
+                        // validator: usuarioController.validarEmail,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                     ),
@@ -110,7 +110,7 @@ class _Login extends State<Login> {
                       child: TextFormField(
                         controller: senhaInputValue,
                         obscureText: !isPasswordVisible,
-                        validator: usuarioController.validarSenha,
+                        // validator: usuarioController.validarSenha,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           labelText: 'Senha',

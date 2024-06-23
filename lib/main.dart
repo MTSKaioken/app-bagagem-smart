@@ -1,4 +1,5 @@
 import 'package:bagagem_smart/refactor/view/cadastro.dart';
+import 'package:bagagem_smart/refactor/view/dashboard_maps.dart';
 import 'package:bagagem_smart/refactor/view/dashboard.dart';
 import 'package:bagagem_smart/refactor/view/home_page.dart';
 import 'package:bagagem_smart/refactor/view/login.dart';
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => Login(),
         '/cadastro': (context) => Cadastro(),
         '/recuperacao': (context) => RecuperacaoConta(),
-        '/dashboard': (context) => Dashboard(),
+        '/dashboard/maps': (context) => DashboardMaps(),
+        '/dashboard': (context) => Dashboard()
       },
     );
   }
