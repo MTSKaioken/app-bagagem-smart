@@ -1,5 +1,4 @@
-class ValidationException implements Exception{
-
+class ValidationException implements Exception {
   const ValidationException([this.message = '']);
 
   final String message;
@@ -11,8 +10,7 @@ class ValidationException implements Exception{
     return result;
   }
 
-  String getMessage(){
+  String getMessage() {
     return message;
   }
-
 }

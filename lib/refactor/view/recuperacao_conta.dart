@@ -4,7 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class RecuperacaoConta extends StatelessWidget {
-
   RecuperacaoConta({Key? key}) : super(key: key);
 
   final emailInputValue = TextEditingController();
@@ -17,18 +16,12 @@ class RecuperacaoConta extends StatelessWidget {
           title: Text(
             tituloModal,
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.black
-            ),
+                fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
           ),
           message: Text(
             mensagemModal,
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black
-            ),
+                fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
           ),
           cancelButton: CupertinoActionSheetAction(
             child: Text('OK'),
@@ -44,7 +37,7 @@ class RecuperacaoConta extends StatelessWidget {
   String? encodeQueryParameters(Map<String, String> params) {
     return params.entries
         .map((MapEntry<String, String> e) =>
-    '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
         .join('&');
   }
 
@@ -106,14 +99,15 @@ class RecuperacaoConta extends StatelessWidget {
                       if (await canLaunch(url)) {
                         await launch(url);
                       } else {
-                        _notify(context, "Notificação", "Falha ao enviar email");
+                        _notify(
+                            context, "Notificação", "Falha ao enviar email");
                       }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.all(20.0),
                       fixedSize: Size(400, 70),
                       textStyle:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                       primary: Colors.black,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),

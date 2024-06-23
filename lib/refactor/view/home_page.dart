@@ -10,31 +10,27 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               OrientationLayoutBuilder(
-                portrait: (context) =>
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: EdgeInsets.only(top: 150),
-                    ),
-                landscape: (context) =>
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: EdgeInsets.only(top: 5),
-                    ),
+                portrait: (context) => Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(top: 150),
+                ),
+                landscape: (context) => Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(top: 5),
+                ),
               ),
               Image.network(
                   'https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_200x200.png',
                   width: 125),
               OrientationLayoutBuilder(
-                portrait: (context) =>
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: EdgeInsets.only(top: 20),
-                    ),
-                landscape: (context) =>
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: EdgeInsets.only(top: 0),
-                    ),
+                portrait: (context) => Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(top: 20),
+                ),
+                landscape: (context) => Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(top: 0),
+                ),
               ),
               Text('Malas Smart',
                   style: TextStyle(
@@ -43,16 +39,14 @@ class HomePage extends StatelessWidget {
                     color: Colors.black,
                   )),
               OrientationLayoutBuilder(
-                portrait: (context) =>
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: EdgeInsets.only(top: 150),
-                    ),
-                landscape: (context) =>
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: EdgeInsets.only(top: 20),
-                    ),
+                portrait: (context) => Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(top: 150),
+                ),
+                landscape: (context) => Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(top: 20),
+                ),
               ),
               Text(
                 'Login',
@@ -63,16 +57,14 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               OrientationLayoutBuilder(
-                portrait: (context) =>
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: EdgeInsets.only(top: 20),
-                    ),
-                landscape: (context) =>
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: EdgeInsets.only(top: 0),
-                    ),
+                portrait: (context) => Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(top: 20),
+                ),
+                landscape: (context) => Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(top: 0),
+                ),
               ),
               ElevatedButton(
                 child: Text(
@@ -87,24 +79,22 @@ class HomePage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(20.0),
                   fixedSize: Size(345, 70),
-                  textStyle: TextStyle(
-                      fontSize: 25, fontWeight: FontWeight.bold),
+                  textStyle:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   primary: Colors.black,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(35)),
                 ),
               ),
               OrientationLayoutBuilder(
-                portrait: (context) =>
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: EdgeInsets.only(top: 20),
-                    ),
-                landscape: (context) =>
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: EdgeInsets.only(top: 5),
-                    ),
+                portrait: (context) => Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(top: 20),
+                ),
+                landscape: (context) => Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(top: 5),
+                ),
               ),
               ElevatedButton(
                 child: Text(
@@ -123,8 +113,8 @@ class HomePage extends StatelessWidget {
                   ),
                   // padding: EdgeInsets.all(20.0),
                   fixedSize: Size(300, 70),
-                  textStyle: TextStyle(
-                      fontSize: 25, fontWeight: FontWeight.bold),
+                  textStyle:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   primary: Colors.white,
                   shadowColor: Colors.transparent,
                   shape: RoundedRectangleBorder(

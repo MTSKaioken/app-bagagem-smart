@@ -2,9 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 class ProfileImagePicker extends StatefulWidget {
-
   @override
   _ProfileImagePickerState createState() => _ProfileImagePickerState();
 }
@@ -14,8 +12,8 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   PickedFile? _pickedImage;
 
   Future<void> _getImage() async {
-    final pickedImage = await _imagePicker.getImage(
-        source: ImageSource.gallery);
+    final pickedImage =
+        await _imagePicker.getImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         _pickedImage = pickedImage;
@@ -31,8 +29,9 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
           child: CircleAvatar(
             radius: 60,
             backgroundColor: Colors.grey,
-            backgroundImage: _pickedImage != null ? FileImage(
-                File.fromUri(Uri.file(_pickedImage!.path))) : null,
+            backgroundImage: _pickedImage != null
+                ? FileImage(File.fromUri(Uri.file(_pickedImage!.path)))
+                : null,
           ),
           onTap: _getImage,
         ),

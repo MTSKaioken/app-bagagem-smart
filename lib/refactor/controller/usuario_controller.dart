@@ -5,15 +5,15 @@ import 'package:email_validator/email_validator.dart';
 import '../dao/usuario_dao.dart';
 
 class UsuarioController {
-
   cadastrarUsuario(Usuario usuario) async {
-      bool usuarioEncontrado = await UsuarioDao().emailJaCadastrado(usuario.getEmail());
+    bool usuarioEncontrado =
+        await UsuarioDao().emailJaCadastrado(usuario.getEmail());
 
-      if(usuarioEncontrado == false){
-        await UsuarioDao().cadastrarUsuario(usuario);
-      } else {
-        throw ValidationException('Usuario já cadastrado!');
-      }
+    if (usuarioEncontrado == false) {
+      await UsuarioDao().cadastrarUsuario(usuario);
+    } else {
+      throw ValidationException('Usuario já cadastrado!');
+    }
   }
 
   Future<Usuario> autenticarUsuario(String email, String senha) async {
@@ -47,8 +47,8 @@ class UsuarioController {
     }
   }
 
-  void isCadastroValido(String nome, String email, String senha,
-      String senhaReptida) {
+  void isCadastroValido(
+      String nome, String email, String senha, String senhaReptida) {
     if (nome.isEmpty && nome.length < 4) {
       throw ValidationException("Informe um nome válido!");
     }

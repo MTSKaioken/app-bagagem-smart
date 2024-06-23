@@ -20,7 +20,7 @@ class _Login extends State<Login> {
 
   bool isPasswordVisible = false;
 
-  _isPasswordVisible(){
+  _isPasswordVisible() {
     setState(() {
       isPasswordVisible = !isPasswordVisible;
     });
@@ -34,18 +34,12 @@ class _Login extends State<Login> {
           title: Text(
             tituloModal,
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.black
-            ),
+                fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
           ),
           message: Text(
             mensagemModal,
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black
-            ),
+                fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
           ),
           cancelButton: CupertinoActionSheetAction(
             child: Text('OK'),
@@ -121,7 +115,9 @@ class _Login extends State<Login> {
                         decoration: InputDecoration(
                           labelText: 'Senha',
                           border: OutlineInputBorder(),
-                          suffixIcon: BtnShowHidePassword(onToggle: _isPasswordVisible,),
+                          suffixIcon: BtnShowHidePassword(
+                            onToggle: _isPasswordVisible,
+                          ),
                         ),
                       ),
                     ),
@@ -131,9 +127,7 @@ class _Login extends State<Login> {
                     ),
                     ElevatedButton(
                       child: Text('Login'),
-                      onPressed: () => {
-                        callbackLogin(context)
-                      },
+                      onPressed: () => {callbackLogin(context)},
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.all(20.0),
                         fixedSize: Size(400, 70),

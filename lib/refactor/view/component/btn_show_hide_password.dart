@@ -2,18 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BtnShowHidePassword extends StatefulWidget {
-
   final VoidCallback onToggle;
 
   BtnShowHidePassword({required this.onToggle});
 
   @override
   _BtnShowHidePassword createState() => _BtnShowHidePassword();
-
 }
 
 class _BtnShowHidePassword extends State<BtnShowHidePassword> {
-
   bool isPasswordVisible = false;
 
   void togglePasswordVisibility() {
@@ -32,5 +29,4 @@ class _BtnShowHidePassword extends State<BtnShowHidePassword> {
           : Icon(Icons.visibility_off),
     );
   }
-
 }

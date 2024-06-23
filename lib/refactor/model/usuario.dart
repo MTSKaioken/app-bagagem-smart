@@ -6,7 +6,6 @@ class Usuario {
   String email;
   String senha;
 
-
   factory Usuario.fromSnapshot(DocumentSnapshot snapshot) {
     return Usuario(
       idUsuario: snapshot['id_usuario'],
@@ -23,27 +22,23 @@ class Usuario {
     };
   }
 
-
-
   // construtor da classe Usuario, que pode receber o email e a senha... mas se
   // não forem passados vão ser setados como nulo (por conta do ? junto a tipagem
-  Usuario({
-    this.idUsuario,
-    required this.email,
-    this.senha = '',
-    this.nome = 'Não informado'
-  });
+  Usuario(
+      {this.idUsuario,
+      required this.email,
+      this.senha = '',
+      this.nome = 'Não informado'});
 
-  String getEmail(){
+  String getEmail() {
     return this.email;
   }
 
-  String getSenha(){
+  String getSenha() {
     return this.senha;
   }
 
-  String getNome(){
+  String getNome() {
     return this.nome;
   }
-
 }

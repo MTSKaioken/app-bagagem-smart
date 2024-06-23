@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:bagagem_smart/refactor/model/usuario.dart';
 
 class NavbarLateral extends StatelessWidget {
-
   final BuildContext parentContext;
 
   final Usuario usuarioLogado;
@@ -12,7 +11,6 @@ class NavbarLateral extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -74,7 +72,7 @@ class NavbarLateral extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Sair'),
-            onTap: () => { Navigator.pushNamed(parentContext, "/") },
+            onTap: () => {Navigator.pushNamed(parentContext, "/")},
           ),
         ],
       ),

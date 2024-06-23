@@ -9,13 +9,11 @@ import '../controller/usuario_controller.dart';
 import '../model/usuario.dart';
 
 class Cadastro extends StatefulWidget {
-
   @override
   _Cadastro createState() => _Cadastro();
 }
 
 class _Cadastro extends State<Cadastro> {
-
   UsuarioController usuarioController = UsuarioController();
 
   final nomeInputValue = TextEditingController();
@@ -26,18 +24,17 @@ class _Cadastro extends State<Cadastro> {
   bool isPasswordVisible = false;
   bool isPasswordConfirmationVisible = false;
 
-  togglePassword(){
+  togglePassword() {
     setState(() {
       isPasswordVisible = !isPasswordVisible;
     });
   }
 
-  togglePasswordConfirmation(){
+  togglePasswordConfirmation() {
     setState(() {
       isPasswordConfirmationVisible = !isPasswordConfirmationVisible;
     });
   }
-
 
   void _notify(BuildContext context, String tituloModal, String mensagemModal) {
     showCupertinoModalPopup(
@@ -47,18 +44,12 @@ class _Cadastro extends State<Cadastro> {
           title: Text(
             tituloModal,
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.black
-            ),
+                fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
           ),
           message: Text(
             mensagemModal,
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black
-            ),
+                fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
           ),
           cancelButton: CupertinoActionSheetAction(
             child: Text('OK'),
@@ -72,23 +63,23 @@ class _Cadastro extends State<Cadastro> {
   }
 
   void cadastrar() async {
-    try{
+    try {
       Usuario usuario = Usuario(
-          email: emailInputValue.text,
-          nome: nomeInputValue.text,
-          senha: senhaInputValue.text,
+        email: emailInputValue.text,
+        nome: nomeInputValue.text,
+        senha: senhaInputValue.text,
       );
 
       usuarioController.isCadastroValido(
-          nomeInputValue.text,
-          emailInputValue.text,
-          senhaInputValue.text,
-          senhaRepetidaInputValue.text,
+        nomeInputValue.text,
+        emailInputValue.text,
+        senhaInputValue.text,
+        senhaRepetidaInputValue.text,
       );
 
       await usuarioController.cadastrarUsuario(usuario);
       _notify(context, "Notificação", "Cadastrado com sucesso!");
-    } on ValidationException catch(e){
+    } on ValidationException catch (e) {
       _notify(context, "Notificação", e.getMessage());
     }
   }
@@ -149,7 +140,8 @@ class _Cadastro extends State<Cadastro> {
                       decoration: InputDecoration(
                         labelText: 'Senha',
                         border: OutlineInputBorder(),
-                        suffixIcon: BtnShowHidePassword(onToggle: togglePassword),
+                        suffixIcon:
+                            BtnShowHidePassword(onToggle: togglePassword),
                       ),
                     ),
                   ),
@@ -162,10 +154,10 @@ class _Cadastro extends State<Cadastro> {
                       controller: senhaRepetidaInputValue,
                       obscureText: !isPasswordConfirmationVisible,
                       decoration: InputDecoration(
-                        labelText: 'Senha',
-                        border: OutlineInputBorder(),
-                        suffixIcon: BtnShowHidePassword(onToggle: togglePasswordConfirmation)
-                      ),
+                          labelText: 'Senha',
+                          border: OutlineInputBorder(),
+                          suffixIcon: BtnShowHidePassword(
+                              onToggle: togglePasswordConfirmation)),
                     ),
                   ),
                   Container(
@@ -179,7 +171,7 @@ class _Cadastro extends State<Cadastro> {
                       padding: EdgeInsets.all(20.0),
                       fixedSize: Size(400, 70),
                       textStyle:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                       primary: Colors.black,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),

@@ -4,14 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../model/usuario.dart';
 
 class UsuarioDao {
-
   Future<bool> cadastrarUsuario(Usuario usuario) async {
     try {
-      CollectionReference usuarios = FirebaseFirestore.instance.collection(
-          'usuarios');
+      CollectionReference usuarios =
+          FirebaseFirestore.instance.collection('usuarios');
       DocumentReference docRef = await usuarios.add(usuario.toMap());
       return true;
-    } catch(e){
+    } catch (e) {
       throw ValidationException('Erro ao salvar!');
     }
   }
@@ -26,7 +25,7 @@ class UsuarioDao {
       return Usuario.fromSnapshot(doc);
     }).toList();
 
-    if(usuarios.isNotEmpty){
+    if (usuarios.isNotEmpty) {
       return true;
     }
 
@@ -44,7 +43,7 @@ class UsuarioDao {
       return Usuario.fromSnapshot(doc);
     }).toList();
 
-    if(usuarios.isNotEmpty){
+    if (usuarios.isNotEmpty) {
       return usuarios.first;
     }
 
