@@ -4,7 +4,7 @@ class Usuario{
 
   Usuario(this.email, this.senha);
 
-  getEmail(){
+  String getEmail(){
     return email;
   }
 

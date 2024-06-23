@@ -51,9 +51,7 @@ class _CamposTelaLogin extends State<CamposTelaLogin> {
   }
 
 
-  Future<void> buscarCadastro() async {
-    bool loginSuccess = false;
-
+  void buscarCadastro() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('usuarios')
         .where('email', isEqualTo: getEmail())
@@ -62,7 +60,6 @@ class _CamposTelaLogin extends State<CamposTelaLogin> {
 
     var usuario = querySnapshot.docs.firstOrNull;
     trataRetornoUsuario(usuario);
-
   }
 
   void trataRetornoUsuario(QueryDocumentSnapshot<Object?>? usuario) {
@@ -124,18 +121,6 @@ class _CamposTelaLogin extends State<CamposTelaLogin> {
           child: Text('Login'),
           onPressed: () async => {
             this.buscarCadastro()
-            // final user = <String, dynamic>{
-            //   "first": "Alan",
-            //   "middle": "Mathison",
-            //   "last": "Turing",
-            //   "born": 1912
-            // };
-// Add a new document with a generated ID
-//                     db.collection("users").add(user).then((DocumentReference doc) =>
-//                         print('DocumentSnapshot added with ID: ${doc.id}'));
-
-            // todo if valid push
-            // Navigator.pushNamed(context, '/dashboard');
           },
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.all(20.0),

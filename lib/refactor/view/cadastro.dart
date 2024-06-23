@@ -1,9 +1,12 @@
+import 'package:bagagem_smart/refactor/exception/validation_exception.dart';
+import 'package:bagagem_smart/refactor/view/component/btn_show_hide_password.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../components/ProfileImagePicker.dart';
+import '../controller/usuario_controller.dart';
+import '../model/usuario.dart';
 
 class Cadastro extends StatefulWidget {
 
@@ -13,99 +16,28 @@ class Cadastro extends StatefulWidget {
 
 class _Cadastro extends State<Cadastro> {
 
-  late BuildContext localContext;
+  UsuarioController usuarioController = UsuarioController();
 
-  TextEditingController _nomeController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _senhaController = TextEditingController();
-  TextEditingController _senhaRepetidaController = TextEditingController();
+  final nomeInputValue = TextEditingController();
+  final emailInputValue = TextEditingController();
+  final senhaInputValue = TextEditingController();
+  final senhaRepetidaInputValue = TextEditingController();
 
   bool isPasswordVisible = false;
+  bool isPasswordConfirmationVisible = false;
 
-  void togglePasswordVisibility() {
+  togglePassword(){
     setState(() {
       isPasswordVisible = !isPasswordVisible;
     });
   }
 
-  String getNome() {
-    return _nomeController.text;
+  togglePasswordConfirmation(){
+    setState(() {
+      isPasswordConfirmationVisible = !isPasswordConfirmationVisible;
+    });
   }
 
-  String getEmail() {
-    return _emailController.text;
-  }
-
-  String getSenha() {
-    return _senhaController.text;
-  }
-
-  String getSenhaRepetida() {
-    return _senhaRepetidaController.text;
-  }
-
-  bool isCadastroValido(context) {
-    if (getNome().isEmpty && getNome().length < 4) {
-      _notify(context, "Notificação", "Informe um nome válido!");
-      return false;
-    }
-
-    if (!EmailValidator.validate(getEmail())) {
-      _notify(context, "Notificação", "Email inválido!");
-      return false;
-    }
-
-    if (getSenha().isEmpty) {
-      _notify(context, "Notificação", "Informe a senha");
-      return false;
-    }
-
-    if(getSenhaRepetida().isEmpty){
-      _notify(context, "Notificação", "Confirme a senha");
-      return false;
-    }
-
-    if (getSenha().length < 4) {
-      _notify(context, "Notificação", "A senha deve possuir ao minimo 4 caracteres");
-      return false;
-    }
-
-    if (getSenha().compareTo(getSenhaRepetida()) != 0) {
-      _notify(context, "Notificação", "A senha deve coincidir");
-      return false;
-    }
-
-    return true;
-  }
-
-  void buscarCadastro() async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('usuarios')
-        .where('email', isEqualTo: getEmail())
-        .get();
-
-    var usuario = querySnapshot.docs.firstOrNull;
-    trataRetornoUsuario(usuario);
-  }
-
-  Future<void> trataRetornoUsuario(QueryDocumentSnapshot<Object?>? usuario) async {
-    if(usuario != null){
-      _notify(localContext, "Notificação", "Usuario já cadastrado");
-    } else {
-      final user = <String, dynamic>{
-        "nome": getNome(),
-        "email": getEmail(),
-        "senha": getSenha(),
-      };
-
-      await FirebaseFirestore.instance.collection("usuarios").add(user)
-              .then((value) {
-                _notify(localContext, "Notificação", "Usuario cadastrado com sucesso!");
-              }).catchError((value){
-                _notify(localContext, "Notificação", "Erro ao cadastrar usuario");
-              });
-    }
-  }
 
   void _notify(BuildContext context, String tituloModal, String mensagemModal) {
     showCupertinoModalPopup(
@@ -118,15 +50,15 @@ class _Cadastro extends State<Cadastro> {
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
                 color: Colors.black
-                ),
+            ),
           ),
           message: Text(
-              mensagemModal,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.black
-              ),
+            mensagemModal,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.black
+            ),
           ),
           cancelButton: CupertinoActionSheetAction(
             child: Text('OK'),
@@ -139,11 +71,30 @@ class _Cadastro extends State<Cadastro> {
     );
   }
 
+  void cadastrar() async {
+    try{
+      Usuario usuario = Usuario(
+          email: emailInputValue.text,
+          nome: nomeInputValue.text,
+          senha: senhaInputValue.text,
+      );
+
+      usuarioController.isCadastroValido(
+          nomeInputValue.text,
+          emailInputValue.text,
+          senhaInputValue.text,
+          senhaRepetidaInputValue.text,
+      );
+
+      await usuarioController.cadastrarUsuario(usuario);
+      _notify(context, "Notificação", "Cadastrado com sucesso!");
+    } on ValidationException catch(e){
+      _notify(context, "Notificação", e.getMessage());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    localContext = context;
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bagagem Smart',
@@ -170,7 +121,7 @@ class _Cadastro extends State<Cadastro> {
                 children: [
                   // ProfileImagePicker(),
                   TextField(
-                    controller: _nomeController,
+                    controller: nomeInputValue,
                     decoration: InputDecoration(
                       labelText: 'Nome',
                       border: OutlineInputBorder(),
@@ -181,7 +132,7 @@ class _Cadastro extends State<Cadastro> {
                     margin: EdgeInsets.only(top: 24),
                   ),
                   TextField(
-                    controller: _emailController,
+                    controller: emailInputValue,
                     decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
@@ -193,17 +144,12 @@ class _Cadastro extends State<Cadastro> {
                   ),
                   Center(
                     child: TextFormField(
-                      controller: _senhaController,
+                      controller: senhaInputValue,
                       obscureText: !isPasswordVisible,
                       decoration: InputDecoration(
                         labelText: 'Senha',
                         border: OutlineInputBorder(),
-                        suffixIcon: IconButton(
-                          onPressed: togglePasswordVisibility,
-                          icon: isPasswordVisible
-                              ? Icon(Icons.visibility)
-                              : Icon(Icons.visibility_off),
-                        ),
+                        suffixIcon: BtnShowHidePassword(onToggle: togglePassword),
                       ),
                     ),
                   ),
@@ -213,17 +159,12 @@ class _Cadastro extends State<Cadastro> {
                   ),
                   Center(
                     child: TextFormField(
-                      controller: _senhaRepetidaController,
-                      obscureText: !isPasswordVisible,
+                      controller: senhaRepetidaInputValue,
+                      obscureText: !isPasswordConfirmationVisible,
                       decoration: InputDecoration(
                         labelText: 'Senha',
                         border: OutlineInputBorder(),
-                        suffixIcon: IconButton(
-                          onPressed: togglePasswordVisibility,
-                          icon: isPasswordVisible
-                              ? Icon(Icons.visibility)
-                              : Icon(Icons.visibility_off),
-                        ),
+                        suffixIcon: BtnShowHidePassword(onToggle: togglePasswordConfirmation)
                       ),
                     ),
                   ),
@@ -233,16 +174,12 @@ class _Cadastro extends State<Cadastro> {
                   ),
                   ElevatedButton(
                     child: Text('Cadastrar'),
-                    onPressed: () {
-                      if(isCadastroValido(context)){
-                        buscarCadastro();
-                      }
-                    },
+                    onPressed: cadastrar,
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.all(20.0),
                       fixedSize: Size(400, 70),
                       textStyle:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                       primary: Colors.black,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
