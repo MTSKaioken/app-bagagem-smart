@@ -16,19 +16,19 @@ class _Balanca extends State<Balanca> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: 50,
-              height: 50,
-              padding: EdgeInsets.all(20.0),
+              width: 100,
+              height: 100,
+              padding: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.black,
+              ),
               child: CircularProgressIndicator(
                 color: Colors.black45,
                 backgroundColor: Colors.black54,
                 strokeAlign: 3.0,
                 strokeWidth: 15,
-                value: 0.50,
-              ),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black,
+                value: 0.65,
               ),
             ),
           ],
