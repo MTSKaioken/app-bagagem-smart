@@ -31,7 +31,11 @@ class Dashboard extends StatelessWidget {
                 Text('Dispositivo Conectado'),
                 // trocar por banner
                 Container(
-                  child: Image.network(''),
+                  child: Image.asset(
+                    fit: BoxFit.fitWidth,
+                    width: double.maxFinite,
+                      'lib/refactor/assets/banner-bagagem.jpg',
+                  ),
                   height: 125,
                   decoration: BoxDecoration(
                     color: Colors.black54,
