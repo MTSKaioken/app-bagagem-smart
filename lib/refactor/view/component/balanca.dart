@@ -15,20 +15,38 @@ class _Balanca extends State<Balanca> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: 100,
-              height: 100,
-              padding: EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black,
-              ),
-              child: CircularProgressIndicator(
-                color: Colors.black45,
-                backgroundColor: Colors.black54,
-                strokeAlign: 3.0,
-                strokeWidth: 15,
-                value: 0.75,
+            // todo avaliar Widget de layout: Stack https://docs.flutter.dev/ui/layout#examples-stack
+            Center(
+              child: Stack(
+                alignment: Alignment(0.6, 0.6),
+                children: [
+                  Text('teste', style: TextStyle(color: Colors.white, fontSize: 30), ),
+
+                  Container(
+                    width: 100,
+                    height: 100,
+                    padding: EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black45,
+                    ),
+                    child: ClipOval(
+                      child: SizedBox.fromSize(
+                        size: Size.fromRadius(48),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.black,
+                          ),
+                          child: Text('10',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white, fontSize: 50),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
