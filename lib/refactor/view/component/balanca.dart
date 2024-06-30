@@ -1,55 +1,60 @@
+import 'package:bagagem_smart/refactor/view/component/barra_de_progresso.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Balanca extends StatefulWidget {
+
   @override
   _Balanca createState() => _Balanca();
 }
 
-class _Balanca extends State<Balanca> {
+class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin{
+
+  late AnimationController progressController;
+
+  late Animation<double> animation;
+
+  @override
+  void initState(){
+    super.initState();
+    progressController = AnimationController(vsync: this, duration: Duration(milliseconds: 8000));
+    animation = Tween<double>(begin: 0, end: 80).animate(progressController)..addListener(() {
+      setState(() {
+        
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
-        heightFactor: 3,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // todo avaliar Widget de layout: Stack https://docs.flutter.dev/ui/layout#examples-stack
-            Center(
-              child: Stack(
-                alignment: Alignment(0.6, 0.6),
-                children: [
-                  Text('teste', style: TextStyle(color: Colors.white, fontSize: 30), ),
-
-                  Container(
-                    width: 100,
-                    height: 100,
-                    padding: EdgeInsets.all(12.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black45,
-                    ),
-                    child: ClipOval(
-                      child: SizedBox.fromSize(
-                        size: Size.fromRadius(48),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.black,
-                          ),
-                          child: Text('10',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white, fontSize: 50),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ));
+      child: CustomPaint(
+        foregroundPainter: BarraDeProgresso(progressoAtual: animation.value),
+        child: Container(
+          width: 100,
+          height: 100,
+          margin: EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.black
+          ),
+          child: GestureDetector(
+            onTap: (){
+              if(animation.value == 80){
+                progressController.reverse();
+              } else {
+                progressController.forward();
+              }
+            },
+            child: Center(child: Text('${animation.value.toStringAsFixed(2)}',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                ),
+            )),
+          ),
+        ),
+      ),
+    );
   }
 }
