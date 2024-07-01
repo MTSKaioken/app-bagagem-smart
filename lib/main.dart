@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'Bagagem Smart',
       // themeMode: ThemeMode.system,
       // home: AcessDB(),
-      initialRoute: '/',
+      initialRoute: '/dashboard',
       routes: {
         '/': (context) => HomePage(),
         '/login': (context) => Login(),
