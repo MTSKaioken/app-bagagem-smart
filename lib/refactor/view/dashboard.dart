@@ -37,9 +37,10 @@ class Dashboard extends StatelessWidget {
                 // trocar por banner
                 Container(
                   child: Image.asset(
+                    'lib/refactor/assets/banner-bagagem.jpg',
                     fit: BoxFit.fitWidth,
                     width: double.maxFinite,
-                    'lib/refactor/assets/banner-bagagem.jpg',
+                    alignment: Alignment.topCenter,
                   ),
                   height: 115,
                   decoration: BoxDecoration(
@@ -62,7 +63,10 @@ class Dashboard extends StatelessWidget {
                   children: [
                     Text(
                       'Sua Bagagem',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold
+                      ),
                     ),
                   ],
                 ),
