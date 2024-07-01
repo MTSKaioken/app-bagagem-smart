@@ -72,6 +72,13 @@ flutter:
     - lib/refactor/assets/bagagem-icon-sem-bg.png
     - lib/refactor/assets/bagagem_perfil.png
     - lib/refactor/assets/banner-bagagem.jpg
+
+  fonts:
+    - family: Rowdies
+      fonts:
+        - asset: lib/refactor/assets/fonts/Rowdies-Light.ttf
+        - asset: lib/refactor/assets/fonts/Rowdies-Regular.ttf
+        - asset: lib/refactor/assets/fonts/Rowdies-Bold.ttf
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

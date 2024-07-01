@@ -12,14 +12,14 @@ class BarraDeProgresso extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint circuloInterno = Paint()
-        ..strokeWidth = 13
-        ..color = Colors.black38
+        ..strokeWidth = 25
+        ..color = Colors.black26
         ..style = PaintingStyle.stroke;
 
     Paint arco = Paint()
-      ..strokeWidth = 13
+      ..strokeWidth = 25
       ..style = PaintingStyle.stroke
-      ..color = Colors.black26
+      ..color = Colors.black45
       ..strokeCap = StrokeCap.round;
 
     Offset center = Offset(size.width/2, size.height/2);

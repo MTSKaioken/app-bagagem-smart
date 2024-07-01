@@ -17,8 +17,8 @@ class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin{
   @override
   void initState(){
     super.initState();
-    progressController = AnimationController(vsync: this, duration: Duration(milliseconds: 8000));
-    animation = Tween<double>(begin: 0, end: 80).animate(progressController)..addListener(() {
+    progressController = AnimationController(vsync: this, duration: Duration(milliseconds: 3500));
+    animation = Tween<double>(begin: 0, end: 15).animate(progressController)..addListener(() {
       setState(() {
         
       });
@@ -28,6 +28,7 @@ class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Center(
+      heightFactor: 2,
       child: CustomPaint(
         foregroundPainter: BarraDeProgresso(progressoAtual: animation.value),
         child: Container(
@@ -40,16 +41,18 @@ class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin{
           ),
           child: GestureDetector(
             onTap: (){
-              if(animation.value == 80){
+              if(animation.value == 15){
                 progressController.reverse();
               } else {
                 progressController.forward();
               }
             },
-            child: Center(child: Text('${animation.value.toStringAsFixed(2)}',
+            child: Center(child: Text('${animation.value.toInt()}',
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 30,
+                    fontSize: 45,
+                    fontFamily: 'Rowdies',
+                    fontWeight: FontWeight.bold
                 ),
             )),
           ),
