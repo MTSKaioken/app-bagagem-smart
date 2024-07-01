@@ -41,7 +41,7 @@ class Dashboard extends StatelessWidget {
                     width: double.maxFinite,
                     'lib/refactor/assets/banner-bagagem.jpg',
                   ),
-                  height: 125,
+                  height: 115,
                   decoration: BoxDecoration(
                     color: Colors.black54,
                   ),
@@ -73,7 +73,7 @@ class Dashboard extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
                           width: double.maxFinite,
-                          height: 175,
+                          height: 170,
                           child: FlutterMap(
                             options: MapOptions(
                               center: LatLng(-23.60044, -46.43707),
