@@ -72,6 +72,7 @@ flutter:
     - lib/refactor/assets/bagagem-icon-sem-bg.png
     - lib/refactor/assets/bagagem_perfil.png
     - lib/refactor/assets/banner-bagagem.jpg
+    - lib/refactor/assets/localizacao-da-bagagem.png
 
   fonts:
     - family: Rowdies
