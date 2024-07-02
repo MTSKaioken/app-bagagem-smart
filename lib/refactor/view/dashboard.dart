@@ -87,7 +87,17 @@ class Dashboard extends StatelessWidget {
                               TileLayer(
                                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                                 userAgentPackageName: 'org.example.app',
-                              )
+                              ),
+                              MarkerLayer(
+                                markers: [
+                                  Marker(
+                                    point: LatLng(-23.60044, -46.43707),
+                                    width: 80,
+                                    height: 80,
+                                    builder: (context) => Image.asset("lib/refactor/assets/localizacao-da-bagagem.png"),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
