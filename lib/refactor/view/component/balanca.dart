@@ -3,26 +3,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Balanca extends StatefulWidget {
-
   @override
   _Balanca createState() => _Balanca();
 }
 
-class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin{
-
+class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin {
   late AnimationController progressController;
 
   late Animation<double> animation;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    progressController = AnimationController(vsync: this, duration: Duration(milliseconds: 3500));
-    animation = Tween<double>(begin: 0, end: 15).animate(progressController)..addListener(() {
-      setState(() {
-        
+    progressController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 3800));
+    animation = Tween<double>(begin: 0, end: 75).animate(progressController)
+      ..addListener(() {
+        setState(() {});
       });
-    });
   }
 
   @override
@@ -35,25 +33,25 @@ class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin{
           width: 100,
           height: 100,
           margin: EdgeInsets.all(10.0),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.black
-          ),
+          decoration:
+              BoxDecoration(shape: BoxShape.circle, color: Colors.black),
           child: GestureDetector(
-            onTap: (){
-              if(animation.value == 15){
-                progressController.reverse();
+            onTap: () {
+              if(animation.value == 75) {
+                progressController.value = 0;
+                progressController.forward();
               } else {
                 progressController.forward();
               }
             },
-            child: Center(child: Text('${animation.value.toInt()}',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 45,
-                    fontFamily: 'Rowdies',
-                    fontWeight: FontWeight.bold
-                ),
+            child: Center(
+                child: Text(
+              '${animation.value.toInt()}',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 45,
+                  fontFamily: 'Rowdies',
+                  fontWeight: FontWeight.bold),
             )),
           ),
         ),
