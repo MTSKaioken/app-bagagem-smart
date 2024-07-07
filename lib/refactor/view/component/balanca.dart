@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bagagem_smart/refactor/view/component/barra_de_progresso.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,16 +10,19 @@ class Balanca extends StatefulWidget {
 }
 
 class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin {
+
   late AnimationController progressController;
 
   late Animation<double> animation;
+
+  late double finalAnimacao = 75;
 
   @override
   void initState() {
     super.initState();
     progressController = AnimationController(
         vsync: this, duration: Duration(milliseconds: 3800));
-    animation = Tween<double>(begin: 0, end: 75).animate(progressController)
+    animation = Tween<double>(begin: 0, end: finalAnimacao).animate(progressController)
       ..addListener(() {
         setState(() {});
       });
@@ -37,8 +42,19 @@ class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin {
               BoxDecoration(shape: BoxShape.circle, color: Colors.black),
           child: GestureDetector(
             onTap: () {
-              if(animation.value == 75) {
+              if(animation.value == finalAnimacao) {
                 progressController.value = 0;
+
+                setState(() {
+                  finalAnimacao = Random().nextInt(100).toDouble();
+                  print(finalAnimacao);
+
+                  animation = Tween<double>(begin: 0, end: finalAnimacao).animate(progressController)
+                  ..addListener(() {
+                    setState(() {});
+                  });
+                });
+
                 progressController.forward();
               } else {
                 progressController.forward();

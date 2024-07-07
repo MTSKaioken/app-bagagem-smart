@@ -30,6 +30,18 @@ class BarraDeProgresso extends CustomPainter {
     double angle = 2 * pi * (progressoAtual/100);
 
     canvas.drawArc(Rect.fromCircle(center: center, radius: radius), -pi/2, angle, false, arco);
+
+
+    Paint plaquinha = Paint()
+      ..strokeWidth = 40
+      ..style = PaintingStyle.fill
+      ..color = Colors.black
+      ..strokeCap = StrokeCap.square;
+    RRect fullRect = RRect.fromRectAndRadius(
+      Rect.fromCenter(center: Offset(size.width, -size.height/4), width: size.width / 2, height: size.height / 3),
+      Radius.circular(15),
+    );
+    canvas.drawRRect(fullRect, plaquinha);
   }
 
   @override
