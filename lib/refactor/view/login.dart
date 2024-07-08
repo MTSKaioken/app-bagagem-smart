@@ -97,6 +97,7 @@ class _Login extends State<Login> {
                         decoration: InputDecoration(
                           labelText: 'Email',
                           border: OutlineInputBorder(),
+                            prefixIcon: Icon(Icons.mail)
                         ),
                         // validator: usuarioController.validarEmail,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -115,6 +116,7 @@ class _Login extends State<Login> {
                         decoration: InputDecoration(
                           labelText: 'Senha',
                           border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.password),
                           suffixIcon: BtnShowHidePassword(
                             onToggle: _isPasswordVisible,
                           ),

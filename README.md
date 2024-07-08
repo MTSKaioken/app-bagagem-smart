@@ -18,6 +18,8 @@ samples, guidance on mobile development, and a full API reference.
 
 ## todo
 
+[ ] - bug onClick na balança
+
 [ ] - salvar foto do usuario
 
 [ ] - exibir foto associada ao usuario no menu lateral
