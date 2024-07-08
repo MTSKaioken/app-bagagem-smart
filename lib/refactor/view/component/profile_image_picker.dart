@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileImagePicker extends StatefulWidget {
@@ -41,7 +42,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
               children: <Widget>[
                 Positioned(
                   bottom: 0,
-                  right: -3,
+                  right: 0,
                   child: InkWell(
                     onTap: () {
                       if(_pickedImage != null){
@@ -55,7 +56,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                       }
                     },
                     child: Icon(
-                      _pickedImage == null ? Icons.add_circle : Icons.delete_rounded,
+                      _pickedImage == null ? FontAwesomeIcons.plusCircle : FontAwesomeIcons.minusCircle,
                       color: Colors.black,
                       size: 30,
                     ),
