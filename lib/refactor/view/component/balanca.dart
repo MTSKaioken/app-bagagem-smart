@@ -42,36 +42,32 @@ class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Center(
-      heightFactor: 1.2,
+      heightFactor: 1.1,
       child: Column(
         children: [
-          Positioned(
-              child: Container(
-                width: 85,
-                height: 55,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Center(
-                  child: Text(
-                    'KG',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
+          Container(
+            width: 85,
+            height: 55,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Center(
+              child: Text(
+                'KG',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
                 ),
               ),
+            ),
           ),
-          Positioned(
-            child: Center(
-              child: Container(
-                width: 10,
-                height: 20,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                ),
+          Center(
+            child: Container(
+              width: 10,
+              height: 20,
+              decoration: BoxDecoration(
+                color: Colors.black,
               ),
             ),
           ),
