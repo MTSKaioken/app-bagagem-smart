@@ -55,7 +55,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                       }
                     },
                     child: Icon(
-                      Icons.add_circle,
+                      _pickedImage == null ? Icons.add_circle : Icons.delete_rounded,
                       color: Colors.black,
                       size: 30,
                     ),
