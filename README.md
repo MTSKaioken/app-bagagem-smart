@@ -18,12 +18,32 @@ samples, guidance on mobile development, and a full API reference.
 
 ## todo
 
-[ ] - cadastro de usuario
+[ ] - salvar foto do usuario
 
-[ ] - login em conta cadastrada
+[ ] - exibir foto associada ao usuario no menu lateral
+
+[ ] - melhorar parte relacionada ao status de conexão do dispositivo
+
+[ ] - buscar coordenadas associadas ao usuario no banco
+
+[ ] - buscar nome do lugar com base nas coordenadas associadas ao usuario 
 
 [ ] - redefinição de senha
 
+[ ] - tela de configurações, ajustar um timer (job) para atualização da localização e do peso.
+
+
+##  feito
+
+[x] - cadastro de usuario
+
+[x] - login em conta cadastrada
+
+[x] - buscar pesagem associada ao usuario no banco
+
+[x] - reproduzir layout da balança conforme recebido
+
+[x] - termos e condições + politica de privacidade (lorem ipsum)
 
 ## utils
 
