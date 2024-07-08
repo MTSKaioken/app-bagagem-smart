@@ -10,6 +10,7 @@ import 'package:bagagem_smart/refactor/view/termos_and_condicoes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,9 +30,15 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       locale: const Locale('pt', 'BR'),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: const [
+        Locale('pt', 'BR')
+      ],
       title: 'Bagagem Smart',
       // themeMode: ThemeMode.system,
-      // home: AcessDB(),
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),

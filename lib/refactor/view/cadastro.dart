@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../controller/usuario_controller.dart';
 import '../model/usuario.dart';
+import 'component/profile_image_picker.dart';
 
 class Cadastro extends StatefulWidget {
   @override
@@ -93,6 +94,7 @@ class _Cadastro extends State<Cadastro> {
     }
   }
 
+  // todo validar melhor data selecionada
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -133,7 +135,7 @@ class _Cadastro extends State<Cadastro> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // ProfileImagePicker(),
+                  ProfileImagePicker(),
                   TextField(
                     controller: nomeInputValue,
                     decoration: InputDecoration(

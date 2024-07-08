@@ -36,6 +36,8 @@ dependencies:
   email_validator: '^2.1.16'
   flutter_map: ^3.1.0
   latlong2: ^0.8.1
+  flutter_localizations:
+    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -51,6 +53,7 @@ dev_dependencies:
   image_picker: ^0.8.4+2
   url_launcher: ^6.0.10
   responsive_builder: ^0.7.0
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
