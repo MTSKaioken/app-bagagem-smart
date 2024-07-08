@@ -1,7 +1,5 @@
 import 'package:bagagem_smart/refactor/exception/validation_exception.dart';
 import 'package:bagagem_smart/refactor/view/component/btn_show_hide_password.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -78,6 +76,7 @@ class _Cadastro extends State<Cadastro> {
         email: emailInputValue.text,
         nome: nomeInputValue.text,
         senha: senhaInputValue.text,
+        dtNascimento: dtNascimentoInputValue.text
       );
 
       usuarioController.isCadastroValido(

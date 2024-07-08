@@ -3,14 +3,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Usuario {
   String idUsuario;
   String nome;
+  String dtNascimento;
   String email;
   String senha;
+
 
   factory Usuario.fromSnapshot(DocumentSnapshot snapshot) {
     return Usuario(
       idUsuario: snapshot.id,
       nome: snapshot['nome'],
       email: snapshot['email'],
+      dtNascimento: snapshot['dt_nascimento']
     );
   }
 
@@ -19,6 +22,7 @@ class Usuario {
       'nome': nome,
       'email': email,
       'senha': senha,
+      'dtNascimento': dtNascimento,
     };
   }
 
@@ -27,18 +31,23 @@ class Usuario {
   Usuario({
       this.idUsuario = '',
       required this.email,
+      this.dtNascimento = '',
       this.senha = '',
       this.nome = 'Não informado'});
 
   String getEmail() {
-    return this.email;
+    return email;
   }
 
   String getSenha() {
-    return this.senha;
+    return senha;
   }
 
   String getNome() {
-    return this.nome;
+    return nome;
+  }
+
+  String getDtNascimento() {
+    return dtNascimento;
   }
 }
