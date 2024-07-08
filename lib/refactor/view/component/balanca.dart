@@ -6,6 +6,13 @@ import 'package:flutter/material.dart';
 import '../../controller/usuario_controller.dart';
 
 class Balanca extends StatefulWidget {
+
+  final String idUsuario;
+
+  Balanca({super.key, required this.idUsuario});
+
+
+
   @override
   _Balanca createState() => _Balanca();
 }
@@ -18,7 +25,7 @@ class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin {
 
   late Animation<double> animation;
 
-  late double finalAnimacao = 75;
+  late double finalAnimacao = 0;
 
   @override
   void initState() {
@@ -81,13 +88,9 @@ class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin {
                 onTap: () {
                   if (animation.value == finalAnimacao) {
                     progressController.value = 0;
-
-                    setState(() {
-
-                      double peso = usuarioController.lerPesoAssociadoAoUsuario();
-
-                      finalAnimacao = Random().nextInt(100).toDouble();
-                      print(finalAnimacao);
+                    setState(() async {
+                      double peso = await usuarioController.lerPesoAssociadoAoUsuario(widget.idUsuario);
+                      finalAnimacao = peso;
 
                       animation = Tween<double>(begin: 0, end: finalAnimacao)
                           .animate(progressController)

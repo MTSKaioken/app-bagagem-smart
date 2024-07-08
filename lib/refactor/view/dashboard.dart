@@ -98,7 +98,7 @@ class Dashboard extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Balanca(),
+                        Balanca(idUsuario: usuario.idUsuario),
                       ],
                     ),
                   ],

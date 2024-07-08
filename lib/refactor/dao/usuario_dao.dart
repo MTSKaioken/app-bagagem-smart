@@ -53,11 +53,19 @@ class UsuarioDao {
   //
   // bool? deletarUsuario(Usuario usuario) {}
 
-  Future<double> lerPesoAssociadoAoUsuario(String id) async {
+  Future<double?> lerPesoAssociadoAoUsuario(String id) async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('pesagens')
+        .collection('usuario_pesagens')
         .where('id_usuario', isEqualTo: id)
+        .orderBy('dt_pesagem', descending: true)
+        // .limit(1)
         .get();
-    return 1.9;
+
+    if (querySnapshot.docs.isNotEmpty) {
+      double? pesagem = querySnapshot.docs.first['peso'].toDouble();
+      return pesagem;
+    } else {
+      return null;
+    }
   }
 }

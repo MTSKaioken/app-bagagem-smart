@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Usuario {
-  String? idUsuario;
+  String idUsuario;
   String nome;
   String email;
   String senha;
@@ -24,8 +24,8 @@ class Usuario {
 
   // construtor da classe Usuario, que pode receber o email e a senha... mas se
   // não forem passados vão ser setados como nulo (por conta do ? junto a tipagem
-  Usuario(
-      {this.idUsuario,
+  Usuario({
+      this.idUsuario = '',
       required this.email,
       this.senha = '',
       this.nome = 'Não informado'});

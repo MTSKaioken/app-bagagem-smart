@@ -5,6 +5,13 @@ import 'package:email_validator/email_validator.dart';
 import '../dao/usuario_dao.dart';
 
 class UsuarioController {
+
+  late UsuarioDao usuarioDao;
+
+  UsuarioController(){
+    usuarioDao = UsuarioDao();
+  }
+
   cadastrarUsuario(Usuario usuario) async {
     bool usuarioEncontrado =
         await UsuarioDao().emailJaCadastrado(usuario.getEmail());
@@ -17,7 +24,7 @@ class UsuarioController {
   }
 
   Future<Usuario> autenticarUsuario(String email, String senha) async {
-    Usuario? usuario = await UsuarioDao().autenticar(email, senha);
+    Usuario? usuario = await usuarioDao.autenticar(email, senha);
     if (usuario != null) {
       return usuario;
     } else {
@@ -75,8 +82,13 @@ class UsuarioController {
   }
 
   Future<double> lerPesoAssociadoAoUsuario(String id) async {
-    await UsuarioDao().lerPesoAssociadoAoUsuario(id);
-    return 1.9;
+     double? pesagem = await usuarioDao.lerPesoAssociadoAoUsuario(id);
+
+     if (pesagem != null) {
+       return pesagem;
+     } else {
+       return 0;
+     }
   }
 
 }

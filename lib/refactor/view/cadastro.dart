@@ -65,6 +65,7 @@ class _Cadastro extends State<Cadastro> {
   void cadastrar() async {
     try {
       Usuario usuario = Usuario(
+        idUsuario: "",
         email: emailInputValue.text,
         nome: nomeInputValue.text,
         senha: senhaInputValue.text,
