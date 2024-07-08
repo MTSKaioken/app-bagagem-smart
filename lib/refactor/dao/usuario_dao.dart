@@ -6,9 +6,8 @@ import '../model/usuario.dart';
 class UsuarioDao {
   Future<bool> cadastrarUsuario(Usuario usuario) async {
     try {
-      CollectionReference usuarios =
-          FirebaseFirestore.instance.collection('usuarios');
-      DocumentReference docRef = await usuarios.add(usuario.toMap());
+      CollectionReference usuarios = FirebaseFirestore.instance.collection('usuarios');
+      await usuarios.doc().set(usuario.toMap());
       return true;
     } catch (e) {
       throw ValidationException('Erro ao salvar!');
@@ -53,4 +52,12 @@ class UsuarioDao {
   // bool? atualizarUsuario(Usuario usuario) {}
   //
   // bool? deletarUsuario(Usuario usuario) {}
+
+  Future<double> lerPesoAssociadoAoUsuario(String id) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('pesagens')
+        .where('id_usuario', isEqualTo: id)
+        .get();
+    return 1.9;
+  }
 }

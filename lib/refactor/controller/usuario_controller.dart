@@ -74,8 +74,8 @@ class UsuarioController {
     }
   }
 
-  double lerPesoAssociadoAoUsuario(){
-
+  Future<double> lerPesoAssociadoAoUsuario(String id) async {
+    await UsuarioDao().lerPesoAssociadoAoUsuario(id);
     return 1.9;
   }
 

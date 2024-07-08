@@ -8,7 +8,7 @@ class Usuario {
 
   factory Usuario.fromSnapshot(DocumentSnapshot snapshot) {
     return Usuario(
-      idUsuario: snapshot['id_usuario'],
+      idUsuario: snapshot.id,
       nome: snapshot['nome'],
       email: snapshot['email'],
     );
