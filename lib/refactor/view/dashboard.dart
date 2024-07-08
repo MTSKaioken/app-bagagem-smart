@@ -79,6 +79,7 @@ class Dashboard extends StatelessWidget {
                             options: MapOptions(
                               center: LatLng(-23.60044, -46.43707),
                               zoom: 17.0,
+                              interactiveFlags: 0
                             ),
                             children: [
                               TileLayer(
