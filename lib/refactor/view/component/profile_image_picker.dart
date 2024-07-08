@@ -44,7 +44,15 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                   right: -3,
                   child: InkWell(
                     onTap: () {
-                      print('teste');
+                      if(_pickedImage != null){
+                        print('imagem selecionada');
+                        setState(() {
+                          _pickedImage = null;
+                        });
+                      } else {
+                        print('imagem vazia');
+                        _getImage();
+                      }
                     },
                     child: Icon(
                       Icons.add_circle,
