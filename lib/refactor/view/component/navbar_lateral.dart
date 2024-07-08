@@ -62,12 +62,16 @@ class NavbarLateral extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.border_color),
             title: Text('Termos & Condições'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.pushNamed(parentContext, "/politica/condicoes")
+            },
           ),
           ListTile(
             leading: Icon(Icons.lock),
             title: Text('Política de Privacidade'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.pushNamed(parentContext, "/politica/privacidade")
+            },
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),

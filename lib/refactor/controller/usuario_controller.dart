@@ -73,4 +73,10 @@ class UsuarioController {
       throw ValidationException("A senha deve coincidir");
     }
   }
+
+  double lerPesoAssociadoAoUsuario(){
+
+    return 1.9;
+  }
+
 }

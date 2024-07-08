@@ -1,9 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../model/usuario.dart';
 import 'component/balanca.dart';
@@ -14,14 +11,14 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final Usuario usuario =
-    //     ModalRoute.of(context)!.settings.arguments as Usuario;
+    final Usuario usuario =
+        ModalRoute.of(context)!.settings.arguments as Usuario;
 
     return MaterialApp(
         title: 'Bagagem Smart',
         home: Scaffold(
           backgroundColor: Colors.white,
-          // drawer: NavbarLateral(parentContext: context, usuarioLogado: usuario),
+          drawer: NavbarLateral(parentContext: context, usuarioLogado: usuario),
           appBar: AppBar(
             backgroundColor: Colors.white,
             shadowColor: Colors.transparent,

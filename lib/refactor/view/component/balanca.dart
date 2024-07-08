@@ -3,12 +3,17 @@ import 'dart:math';
 import 'package:bagagem_smart/refactor/view/component/barra_de_progresso.dart';
 import 'package:flutter/material.dart';
 
+import '../../controller/usuario_controller.dart';
+
 class Balanca extends StatefulWidget {
   @override
   _Balanca createState() => _Balanca();
 }
 
 class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin {
+
+  UsuarioController usuarioController = UsuarioController();
+
   late AnimationController progressController;
 
   late Animation<double> animation;
@@ -78,6 +83,9 @@ class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin {
                     progressController.value = 0;
 
                     setState(() {
+
+                      double peso = usuarioController.lerPesoAssociadoAoUsuario();
+
                       finalAnimacao = Random().nextInt(100).toDouble();
                       print(finalAnimacao);
 
