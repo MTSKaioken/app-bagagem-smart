@@ -25,21 +25,37 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        GestureDetector(
+        InkWell(
+          onTap: _getImage,
+          hoverColor: Colors.pink,
+          onHover: (value) {
+            _getImage();
+          },
           child: CircleAvatar(
             radius: 60,
             backgroundColor: Colors.grey,
             backgroundImage: _pickedImage != null
                 ? FileImage(File.fromUri(Uri.file(_pickedImage!.path)))
                 : null,
+            child: Stack(
+              children: <Widget>[
+                Positioned(
+                  bottom: 0,
+                  right: -3,
+                  child: InkWell(
+                    onTap: () {
+                      print('teste');
+                    },
+                    child: Icon(
+                      Icons.add_circle,
+                      color: Colors.black,
+                      size: 30,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-          onTap: _getImage,
-        ),
-        ElevatedButton(
-          onPressed: _getImage,
-          child: Text('Selecionar imagem'),
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.black)),
         ),
       ],
     );
