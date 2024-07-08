@@ -34,6 +34,8 @@ samples, guidance on mobile development, and a full API reference.
 
 [ ] - tela de configurações, ajustar um timer (job) para atualização da localização e do peso.
 
+[ ] - loading durante renderizações
+
 
 ##  feito
 
