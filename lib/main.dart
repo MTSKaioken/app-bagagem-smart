@@ -3,6 +3,7 @@ import 'package:bagagem_smart/refactor/view/dashboard_maps.dart';
 import 'package:bagagem_smart/refactor/view/dashboard.dart';
 import 'package:bagagem_smart/refactor/view/home_page.dart';
 import 'package:bagagem_smart/refactor/view/login.dart';
+import 'package:bagagem_smart/refactor/view/nome_localizacao.dart';
 import 'package:bagagem_smart/refactor/view/politica_de_privacidade.dart';
 import 'package:bagagem_smart/refactor/view/recuperacao_conta.dart';
 import 'package:bagagem_smart/refactor/view/termos_and_condicoes.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
     ]);
 
     return MaterialApp(
+      locale: const Locale('pt', 'BR'),
       title: 'Bagagem Smart',
       // themeMode: ThemeMode.system,
       // home: AcessDB(),
@@ -39,7 +41,8 @@ class MyApp extends StatelessWidget {
         '/dashboard/maps': (context) => DashboardMaps(),
         '/dashboard': (context) => Dashboard(),
         '/politica/privacidade': (context) => PoliticaDePrivacidade(),
-        '/politica/condicoes': (context) => TermosAndCondicoes()
+        '/politica/condicoes': (context) => TermosAndCondicoes(),
+        '/localizacao': (context) => NomeLocalizacao()
       },
     );
   }

@@ -52,7 +52,9 @@ class NavbarLateral extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.verified_user),
             title: Text('Informações'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.pushNamed(parentContext, "/localizacao")
+            },
           ),
           ListTile(
             leading: Icon(Icons.settings),
