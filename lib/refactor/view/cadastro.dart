@@ -135,6 +135,10 @@ class _Cadastro extends State<Cadastro> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ProfileImagePicker(),
+                  Container(
+                    alignment: Alignment.bottomCenter,
+                    margin: EdgeInsets.only(top: 24),
+                  ),
                   TextField(
                     controller: nomeInputValue,
                     decoration: InputDecoration(
