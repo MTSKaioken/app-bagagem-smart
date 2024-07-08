@@ -14,15 +14,23 @@ class Cadastro extends StatefulWidget {
 }
 
 class _Cadastro extends State<Cadastro> {
-  UsuarioController usuarioController = UsuarioController();
 
+  UsuarioController usuarioController = UsuarioController();
+  late DateTime selectedDate;
   final nomeInputValue = TextEditingController();
+  final dtNascimentoInputValue = TextEditingController();
   final emailInputValue = TextEditingController();
   final senhaInputValue = TextEditingController();
   final senhaRepetidaInputValue = TextEditingController();
 
   bool isPasswordVisible = false;
   bool isPasswordConfirmationVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDate = DateTime.now();
+  }
 
   togglePassword() {
     setState(() {
@@ -85,6 +93,20 @@ class _Cadastro extends State<Cadastro> {
     }
   }
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(1899),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -117,6 +139,24 @@ class _Cadastro extends State<Cadastro> {
                     decoration: InputDecoration(
                       labelText: 'Nome',
                       border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.person)
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.bottomCenter,
+                    margin: EdgeInsets.only(top: 24),
+                  ),
+                  TextField(
+                    controller: dtNascimentoInputValue,
+                    readOnly: true,
+                    onTap: () => {
+                      _selectDate(context),
+                      dtNascimentoInputValue.text = '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}'
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Data Nascimento',
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.calendar_month)
                     ),
                   ),
                   Container(
@@ -128,6 +168,7 @@ class _Cadastro extends State<Cadastro> {
                     decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.mail)
                     ),
                   ),
                   Container(
@@ -141,6 +182,7 @@ class _Cadastro extends State<Cadastro> {
                       decoration: InputDecoration(
                         labelText: 'Senha',
                         border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.password),
                         suffixIcon:
                             BtnShowHidePassword(onToggle: togglePassword),
                       ),
@@ -157,6 +199,7 @@ class _Cadastro extends State<Cadastro> {
                       decoration: InputDecoration(
                           labelText: 'Confirmar senha',
                           border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.password),
                           suffixIcon: BtnShowHidePassword(
                               onToggle: togglePasswordConfirmation)),
                     ),
