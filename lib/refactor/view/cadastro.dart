@@ -21,6 +21,7 @@ class _Cadastro extends State<Cadastro> {
   final emailInputValue = TextEditingController();
   final senhaInputValue = TextEditingController();
   final senhaRepetidaInputValue = TextEditingController();
+  String? imagemPerfilBase64;
 
   bool isPasswordVisible = false;
   bool isPasswordConfirmationVisible = false;
@@ -76,7 +77,8 @@ class _Cadastro extends State<Cadastro> {
         email: emailInputValue.text,
         nome: nomeInputValue.text,
         senha: senhaInputValue.text,
-        dtNascimento: dtNascimentoInputValue.text
+        dtNascimento: dtNascimentoInputValue.text,
+        imagemPerfilBase64: imagemPerfilBase64
       );
 
       usuarioController.isCadastroValido(
@@ -108,6 +110,10 @@ class _Cadastro extends State<Cadastro> {
     }
   }
 
+  void setarBase64ImagemPerfil(){
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -134,7 +140,9 @@ class _Cadastro extends State<Cadastro> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ProfileImagePicker(),
+                  ProfileImagePicker(onSelected: (image) {
+                    imagemPerfilBase64 = image;
+                  },),
                   Container(
                     alignment: Alignment.bottomCenter,
                     margin: EdgeInsets.only(top: 24),

@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:bagagem_smart/refactor/model/usuario.dart';
 
@@ -8,6 +11,15 @@ class NavbarLateral extends StatelessWidget {
 
   /* construtor */
   NavbarLateral({required this.parentContext, required this.usuarioLogado});
+
+  ImageProvider<Object>? _getBackgroundImage(){
+    if (usuarioLogado.imagemPerfilBase64 != null) {
+      Uint8List bytes = base64Decode(usuarioLogado.imagemPerfilBase64.toString());
+      return MemoryImage(bytes);
+    } else {
+      return NetworkImage('https://cdn-icons-png.flaticon.com/512/17/17004.png');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +52,8 @@ class NavbarLateral extends StatelessWidget {
             ),
             currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.transparent,
-                backgroundImage: NetworkImage(
-                  'https://cdn-icons-png.flaticon.com/512/17/17004.png',
-                )),
+                backgroundImage: _getBackgroundImage(),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.edit_square),

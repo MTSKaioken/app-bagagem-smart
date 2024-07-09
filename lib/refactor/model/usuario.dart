@@ -6,6 +6,7 @@ class Usuario {
   String dtNascimento;
   String email;
   String senha;
+  String? imagemPerfilBase64;
 
 
   factory Usuario.fromSnapshot(DocumentSnapshot snapshot) {
@@ -13,7 +14,8 @@ class Usuario {
       idUsuario: snapshot.id,
       nome: snapshot['nome'],
       email: snapshot['email'],
-      dtNascimento: snapshot['dt_nascimento']
+      dtNascimento: snapshot['dt_nascimento'],
+      imagemPerfilBase64: snapshot['imagem_perfil_base64']
     );
   }
 
@@ -22,7 +24,8 @@ class Usuario {
       'nome': nome,
       'email': email,
       'senha': senha,
-      'dtNascimento': dtNascimento,
+      'dt_nascimento': dtNascimento,
+      'imagem_perfil_base64': imagemPerfilBase64
     };
   }
 
@@ -33,7 +36,8 @@ class Usuario {
       required this.email,
       this.dtNascimento = '',
       this.senha = '',
-      this.nome = 'Não informado'});
+      this.nome = 'Não informado',
+      this.imagemPerfilBase64 = ''});
 
   String getEmail() {
     return email;
