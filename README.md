@@ -20,10 +20,6 @@ samples, guidance on mobile development, and a full API reference.
 
 [ ] - bug onClick na balança
 
-[ ] - salvar foto do usuario
-
-[ ] - exibir foto associada ao usuario no menu lateral
-
 [ ] - melhorar parte relacionada ao status de conexão do dispositivo
 
 [ ] - buscar coordenadas associadas ao usuario no banco
@@ -48,6 +44,10 @@ samples, guidance on mobile development, and a full API reference.
 [x] - reproduzir layout da balança conforme recebido
 
 [x] - termos e condições + politica de privacidade (lorem ipsum)
+
+[x] - salvar foto do usuario
+
+[x] - exibir foto associada ao usuario no menu lateral
 
 ## utils
 
