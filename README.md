@@ -16,6 +16,13 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 
+Como rodar o projeto:
+
+- configure as variaveis para redefinição de email
+```bash
+flutter run --dart-define=email-gmail-remetente='teste@teste.com' --dart-define=password-gmail-remetente='password'
+```
+
 ## todo
 
 [ ] - bug onClick na balança

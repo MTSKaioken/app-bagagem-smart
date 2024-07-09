@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class RecuperacaoConta extends StatelessWidget {
@@ -34,11 +35,29 @@ class RecuperacaoConta extends StatelessWidget {
     );
   }
 
-  String? encodeQueryParameters(Map<String, String> params) {
-    return params.entries
-        .map((MapEntry<String, String> e) =>
-            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-        .join('&');
+  void resetPassword(BuildContext context) async {
+    String destinatario = emailInputValue.text.trim();
+
+
+    const String remetente = String.fromEnvironment('email-gmail-remetente');
+    const String senhaRemetente = String.fromEnvironment('password-gmail-remetente');
+    final smtpServer = gmail(remetente, senhaRemetente);
+
+    final message = Message()
+      ..from = Address('bagagemsmart@gmail.com', 'Bagagem Smart')
+      ..recipients.add(destinatario)
+      ..subject = 'Redefinição de Senha'
+      ..text = 'Informe o código a seguir no aplicativo para poder redefinir sua senha:\n\n${'teste'}';
+
+    try {
+      // Envie o e-mail
+      final sendReport = await send(message, smtpServer);
+      print('E-mail enviado: ${sendReport.toString()}');
+      _notify(context, 'Notificação', 'E-mail de redefinição de senha enviado para $destinatario');
+    } catch (e) {
+      print('Erro ao enviar e-mail de redefinição de senha: $e');
+      _notify(context, 'Erro', 'Erro ao enviar e-mail de redefinição de senha.');
+    }
   }
 
   @override
@@ -85,23 +104,7 @@ class RecuperacaoConta extends StatelessWidget {
                   ElevatedButton(
                     child: Text('Enviar'),
                     onPressed: () async {
-                      final Uri params = Uri(
-                        scheme: 'mailto',
-                        path: 'kaioruan2018@gmail.com',
-                        query: encodeQueryParameters(<String, String>{
-                          'subject': 'Assunto do E-mail',
-                          'body': 'Corpo do E-mail',
-                        }),
-                      );
-                      String url = params.toString();
-
-                      // todo erro ao enviar
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        _notify(
-                            context, "Notificação", "Falha ao enviar email");
-                      }
+                      resetPassword(context);
                     },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.all(20.0),
