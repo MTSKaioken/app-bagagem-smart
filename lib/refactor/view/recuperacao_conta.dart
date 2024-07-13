@@ -69,7 +69,7 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
       ..recipients.add(destinatario)
       ..subject = 'Redefinição de Senha'
       ..text =
-          'Informe o código a seguir no aplicativo para poder redefinir sua senha:\n\n${hash}';
+          'Informe o código a seguir no aplicativo para poder redefinir sua senha:\n\n$hash';
 
     try {
       final sendReport = await send(message, smtpServer);
