@@ -114,7 +114,7 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
               },
             ),
             title: Text(
-              'Recuperar a senha',
+              'Alteração de senha',
               textDirection: TextDirection.ltr,
             ),
             backgroundColor: Colors.black87,

@@ -80,7 +80,7 @@ class _NovaSenha extends State<NovaSenha> {
               },
             ),
             title: Text(
-              'Alterar senha',
+              'Alteração de senha',
               textDirection: TextDirection.ltr,
             ),
             backgroundColor: Colors.black87,
