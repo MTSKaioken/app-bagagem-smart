@@ -22,6 +22,7 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
 
   late bool isEnabledCodigo = false;
   late bool isEnabledEmail = true;
+  String hash = "";
 
   void _notify(BuildContext context, String tituloModal, String mensagemModal) {
     showCupertinoModalPopup(
@@ -49,7 +50,7 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
     );
   }
 
-  void resetPassword(BuildContext context) async {
+  void enviarCodigoPorEmailInserido(BuildContext context) async {
     String destinatario = emailInputValue.text.trim();
     // validar email do destinatario... se for valido prosseguir, se não retornar
 
@@ -58,7 +59,10 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
         String.fromEnvironment('password-gmail-remetente');
     final smtpServer = gmail(remetente, senhaRemetente);
 
-    String hash = CriptografiaUtil.generateRandomHash(16);
+    setState(() {
+      hash = CriptografiaUtil.generateRandomHash(16);
+    });
+
     final message = Message()
       ..from = Address('bagagemsmart@gmail.com', 'Bagagem Smart')
       ..recipients.add(destinatario)
@@ -71,12 +75,26 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
       print('E-mail enviado: ${sendReport.toString()}');
       _notify(context, 'Notificação',
           'E-mail de redefinição de senha enviado para $destinatario');
-      // após o envio com sucesso, bloquear o campo de email e liberar o do
-      // código
+      liberarCamposParaInsercaoDoCodigo(context);
     } catch (e) {
       print('Erro ao enviar e-mail de redefinição de senha: $e');
       _notify(
           context, 'Erro', 'Erro ao enviar e-mail de redefinição de senha.');
+    }
+  }
+
+  void liberarCamposParaInsercaoDoCodigo(BuildContext context){
+    setState(() {
+      isEnabledCodigo = true;
+      isEnabledEmail = false;
+    });
+  }
+
+  void validarCodigoInserido(BuildContext context){
+    if(codigoInputValue.text == hash){
+      _notify(context, 'Notificação', 'pode mudar senha');
+    } else {
+      _notify(context, 'Notificação', 'não pode mudar senha');
     }
   }
 
@@ -142,7 +160,12 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
                   ElevatedButton(
                     child: Text('Enviar'),
                     onPressed: () async {
-                      resetPassword(context);
+                      if(isEnabledEmail) {
+                        enviarCodigoPorEmailInserido(context);
+                      }
+                      if(isEnabledCodigo){
+                        validarCodigoInserido(context);
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.all(20.0),
@@ -155,18 +178,15 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
                     ),
                   ),
                   Visibility(
-                    visible: true,
+                    visible: isEnabledCodigo,
                     child: GestureDetector(
                       onTap: () {
-                        // todo quando o email for enviado, apresentar essa label,
-                        // liberar o campo de código e bloquear o do email...
-                        // ao clicar no gerar novo código, desbloquear o email e
-                        // liberar o campo código
                         setState(() {
-                          isEnabledCodigo = !isEnabledCodigo;
-                          isEnabledEmail = !isEnabledEmail;
+                          isEnabledCodigo = false;
+                          isEnabledEmail = true;
                         });
-
+                        emailInputValue.text = "";
+                        codigoInputValue.text = "";
                       },
                       child: Text('Gerar novo código'),
                     ),
