@@ -1,9 +1,5 @@
-import 'package:bagagem_smart/refactor/util/criptografia-util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 import 'component/btn_show_hide_password.dart';
 
@@ -142,7 +138,7 @@ class _NovaSenha extends State<NovaSenha> {
                   ElevatedButton(
                     child: Text('Redefinir'),
                     onPressed: () async {
-
+                      // atualizar senha
                     },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.all(20.0),
