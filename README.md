@@ -18,9 +18,14 @@ samples, guidance on mobile development, and a full API reference.
 
 Como rodar o projeto:
 
-- configure as variaveis para redefinição de email
+- para rodar em um emulador integrado a IDE
 ```bash
 flutter run --dart-define=email-gmail-remetente='teste@teste.com' --dart-define=password-gmail-remetente='password'
+```
+
+- para buildar o APK com as variaveis setadas
+```bash
+flutter build apk --dart-define=email-gmail-remetente='teste@teste.com' --dart-define=password-gmail-remetente='password'
 ```
 
 ## todo
@@ -35,9 +40,15 @@ flutter run --dart-define=email-gmail-remetente='teste@teste.com' --dart-define=
 
 [ ] - redefinição de senha
 
+[ ] - redefinição de senha a partir do menu lateral da dashboard
+
 [ ] - tela de configurações, ajustar um timer (job) para atualização da localização e do peso.
 
 [ ] - loading durante renderizações
+
+[ ] - tempo para expirar o código de redefinição de senha.
+
+[ ] - ao logar, modal perguntando se deseja salvar usuario e/ou senha no local storage. (junto a checkbox de não perguntar novamente)
 
 
 ##  feito

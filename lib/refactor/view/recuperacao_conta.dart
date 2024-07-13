@@ -52,7 +52,8 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
 
   void enviarCodigoPorEmailInserido(BuildContext context) async {
     String destinatario = emailInputValue.text.trim();
-    // validar email do destinatario... se for valido prosseguir, se não retornar
+    // validar email do destinatario... se existir no nosso banco de dados prosseguir,
+    // se não retornar
 
     const String remetente = String.fromEnvironment('email-gmail-remetente');
     const String senhaRemetente =
@@ -92,9 +93,9 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
 
   void validarCodigoInserido(BuildContext context){
     if(codigoInputValue.text == hash){
-      _notify(context, 'Notificação', 'pode mudar senha');
+      Navigator.pushNamed(context, '/redefinir-senha', arguments: emailInputValue.text);
     } else {
-      _notify(context, 'Notificação', 'não pode mudar senha');
+      _notify(context, 'Notificação', 'Código inválido');
     }
   }
 
@@ -127,6 +128,7 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
                   TextField(
                     controller: emailInputValue,
                     enabled: isEnabledEmail,
+                    autofocus: isEnabledEmail,
                     decoration: InputDecoration(
                         filled: !isEnabledEmail,
                         fillColor: isEnabledEmail ? null : Colors.blueGrey[100],
@@ -158,7 +160,7 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
                     margin: EdgeInsets.only(top: 24),
                   ),
                   ElevatedButton(
-                    child: Text('Enviar'),
+                    child: Text(isEnabledEmail ? "Enviar código" : "Validar"),
                     onPressed: () async {
                       if(isEnabledEmail) {
                         enviarCodigoPorEmailInserido(context);

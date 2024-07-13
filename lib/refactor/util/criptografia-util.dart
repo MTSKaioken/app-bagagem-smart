@@ -10,4 +10,11 @@ class CriptografiaUtil{
     return values.map((byte) => byte.toRadixString(16).padLeft(2, '0')).join('');
   }
 
+  static String lpad(String originalString, int length, {String padChar = ' '}) {
+    if (originalString.length >= length) {
+      return originalString;
+    }
+    return padChar * (length - originalString.length) + originalString;
+  }
+
 }

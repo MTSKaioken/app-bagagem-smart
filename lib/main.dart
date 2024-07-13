@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'refactor/view/nova_senha.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -49,7 +51,8 @@ class MyApp extends StatelessWidget {
         '/dashboard': (context) => Dashboard(),
         '/politica/privacidade': (context) => PoliticaDePrivacidade(),
         '/politica/condicoes': (context) => TermosAndCondicoes(),
-        '/localizacao': (context) => NomeLocalizacao()
+        '/localizacao': (context) => NomeLocalizacao(),
+        '/redefinir-senha': (context) => NovaSenha()
       },
     );
   }

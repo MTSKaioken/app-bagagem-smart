@@ -94,6 +94,7 @@ class _Login extends State<Login> {
                     Center(
                       child: TextFormField(
                         controller: emailInputValue,
+                        autofocus: true,
                         decoration: InputDecoration(
                           labelText: 'Email',
                           border: OutlineInputBorder(),
