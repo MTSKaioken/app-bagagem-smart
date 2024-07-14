@@ -28,17 +28,19 @@ flutter run --dart-define=email-gmail-remetente='teste@teste.com' --dart-define=
 flutter build apk --dart-define=email-gmail-remetente='teste@teste.com' --dart-define=password-gmail-remetente='password'
 ```
 
-## todo
+## WIP
+
+[ ] - dialog alertando que não encontrou peso associado ao usuario
+
+[ ] - buscar coordenadas associadas ao usuario no banco
+
+[ ] - buscar nome do lugar com base nas coordenadas associadas ao usuario
+
+## TODO
 
 [ ] - bug onClick na balança
 
 [ ] - melhorar parte relacionada ao status de conexão do dispositivo
-
-[ ] - buscar coordenadas associadas ao usuario no banco
-
-[ ] - buscar nome do lugar com base nas coordenadas associadas ao usuario 
-
-[ ] - redefinição de senha
 
 [ ] - redefinição de senha a partir do menu lateral da dashboard
 
@@ -51,7 +53,9 @@ flutter build apk --dart-define=email-gmail-remetente='teste@teste.com' --dart-d
 [ ] - ao logar, modal perguntando se deseja salvar usuario e/ou senha no local storage. (junto a checkbox de não perguntar novamente)
 
 
-##  feito
+##  FEITO
+
+[x] - redefinição de senha
 
 [x] - cadastro de usuario
 
@@ -67,7 +71,7 @@ flutter build apk --dart-define=email-gmail-remetente='teste@teste.com' --dart-d
 
 [x] - exibir foto associada ao usuario no menu lateral
 
-## utils
+## UTILS
 
 [ ] - aprender a usar o flutter_map para poder exibir a localização da bagagem
 referencia: https://www.youtube.com/watch?v=YuwhlhaM1eM
