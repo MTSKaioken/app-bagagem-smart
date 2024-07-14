@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:bagagem_smart/refactor/util/util.dart';
 import 'package:bagagem_smart/refactor/view/component/barra_de_progresso.dart';
 import 'package:flutter/material.dart';
 
@@ -81,21 +82,25 @@ class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin {
               decoration:
                   BoxDecoration(shape: BoxShape.circle, color: Colors.black),
               child: GestureDetector(
-                onTap: () {
+                onTap: () async {
                   if (animation.value == finalAnimacao) {
                     progressController.value = 0;
-                    setState(() async {
-                      double peso = await usuarioController.lerPesoAssociadoAoUsuario(widget.idUsuario);
-                      finalAnimacao = peso;
 
-                      animation = Tween<double>(begin: 0, end: finalAnimacao)
-                          .animate(progressController)
-                        ..addListener(() {
-                          setState(() {});
-                        });
-                    });
+                    double peso = await usuarioController.lerPesoAssociadoAoUsuario(widget.idUsuario);
+                    if(peso > 0.0) {
+                      setState(() {
+                        finalAnimacao = peso;
 
-                    progressController.forward();
+                        animation = Tween<double>(begin: 0, end: finalAnimacao)
+                            .animate(progressController)
+                          ..addListener(() {
+                            setState(() {});
+                          });
+                      });
+                      progressController.forward();
+                    } else {
+                      Util.notify(context, "Notificação", "Não foi possivel fazer a pesagem");
+                    }
                   } else {
                     progressController.forward();
                   }

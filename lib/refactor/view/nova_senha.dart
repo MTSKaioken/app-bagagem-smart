@@ -1,4 +1,5 @@
 import 'package:bagagem_smart/refactor/controller/usuario_controller.dart';
+import 'package:bagagem_smart/refactor/util/util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -31,37 +32,6 @@ class _NovaSenha extends State<NovaSenha> {
     setState(() {
       isPasswordConfirmationVisible = !isPasswordConfirmationVisible;
     });
-  }
-
-  void _notify(BuildContext context, String tituloModal, String mensagemModal, [String? route]) {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (BuildContext context) {
-        return CupertinoActionSheet(
-          title: Text(
-            tituloModal,
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
-          ),
-          message: Text(
-            mensagemModal,
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
-          ),
-          cancelButton: CupertinoActionSheetAction(
-            child: Text('OK'),
-            onPressed: () {
-              if(route != null){
-                Navigator.pushNamed(context, route);
-              } else {
-                Navigator.pop(context);
-              }
-
-            },
-          ),
-        );
-      },
-    );
   }
 
   @override
@@ -160,12 +130,14 @@ class _NovaSenha extends State<NovaSenha> {
   }
 
   Future<void> redefinirSenha(BuildContext context) async {
-    try{
-    usuarioController.validarSenha(senhaInputValue.text, senhaRepetidaInputValue.text);
-    await usuarioController.atualizarSenhaAssociadaAoEmail(emailInputValue.text, senhaInputValue.text);
-    _notify(context, "Notificação", "Senha atualizada com sucesso!", "/");
+    try {
+      usuarioController.validarSenha(
+          senhaInputValue.text, senhaRepetidaInputValue.text);
+      await usuarioController.atualizarSenhaAssociadaAoEmail(
+          emailInputValue.text, senhaInputValue.text);
+      Util.notify(context, "Notificação", "Senha atualizada com sucesso!", "/");
     } on ValidationException catch (e) {
-      _notify(context, "Notificação", e.getMessage());
+      Util.notify(context, "Notificação", e.getMessage());
     }
   }
 }

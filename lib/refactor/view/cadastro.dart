@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../controller/usuario_controller.dart';
 import '../model/usuario.dart';
-import '../util/criptografia-util.dart';
+import '../util/util.dart';
 import 'component/profile_image_picker.dart';
 
 class Cadastro extends StatefulWidget {
@@ -166,7 +166,7 @@ class _Cadastro extends State<Cadastro> {
                     readOnly: true,
                     onTap: () => {
                       _selectDate(context),
-                      dtNascimentoInputValue.text = '${ CriptografiaUtil.lpad(selectedDate.day.toString(), 2, padChar: '0') }/${ CriptografiaUtil.lpad(selectedDate.month.toString(), 2, padChar: '0') }/${selectedDate.year}'
+                      dtNascimentoInputValue.text = '${ Util.lpad(selectedDate.day.toString(), 2, padChar: '0') }/${ Util.lpad(selectedDate.month.toString(), 2, padChar: '0') }/${selectedDate.year}'
                     },
                     decoration: InputDecoration(
                       labelText: 'Data Nascimento',

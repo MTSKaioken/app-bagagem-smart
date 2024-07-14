@@ -1,4 +1,4 @@
-import 'package:bagagem_smart/refactor/util/criptografia-util.dart';
+import 'package:bagagem_smart/refactor/util/util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
@@ -64,7 +64,7 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
       final smtpServer = gmail(remetente, senhaRemetente);
 
       setState(() {
-        hash = CriptografiaUtil.generateRandomHash(16);
+        hash = Util.generateRandomHash(16);
       });
 
       final message = Message()

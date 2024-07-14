@@ -30,15 +30,11 @@ flutter build apk --dart-define=email-gmail-remetente='teste@teste.com' --dart-d
 
 ## WIP
 
-[ ] - dialog alertando que não encontrou peso associado ao usuario
-
 [ ] - buscar coordenadas associadas ao usuario no banco
 
 [ ] - buscar nome do lugar com base nas coordenadas associadas ao usuario
 
 ## TODO
-
-[ ] - bug onClick na balança
 
 [ ] - melhorar parte relacionada ao status de conexão do dispositivo
 
@@ -70,6 +66,10 @@ flutter build apk --dart-define=email-gmail-remetente='teste@teste.com' --dart-d
 [x] - salvar foto do usuario
 
 [x] - exibir foto associada ao usuario no menu lateral
+
+[x] - dialog alertando que não encontrou peso associado ao usuario
+
+[x] - bug onClick na balança
 
 ## UTILS
 
