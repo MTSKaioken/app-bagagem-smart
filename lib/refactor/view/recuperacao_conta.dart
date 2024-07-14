@@ -5,6 +5,8 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../controller/usuario_controller.dart';
+
 class RecuperacaoConta extends StatefulWidget {
 
   const RecuperacaoConta({super.key});
@@ -17,6 +19,7 @@ class RecuperacaoConta extends StatefulWidget {
 
 class _RecuperacaoConta extends State<RecuperacaoConta> {
 
+  UsuarioController usuarioController = UsuarioController();
   final emailInputValue = TextEditingController();
   final codigoInputValue = TextEditingController();
 
@@ -52,35 +55,38 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
 
   void enviarCodigoPorEmailInserido(BuildContext context) async {
     String destinatario = emailInputValue.text.trim();
-    // validar email do destinatario... se existir no nosso banco de dados prosseguir,
-    // se não retornar
+    bool isDestinatarioCadastrado = await usuarioController.isEmailCadastrado(destinatario);
 
-    const String remetente = String.fromEnvironment('email-gmail-remetente');
-    const String senhaRemetente =
-        String.fromEnvironment('password-gmail-remetente');
-    final smtpServer = gmail(remetente, senhaRemetente);
+    if(isDestinatarioCadastrado) {
+      const String remetente = String.fromEnvironment('email-gmail-remetente');
+      const String senhaRemetente =
+      String.fromEnvironment('password-gmail-remetente');
+      final smtpServer = gmail(remetente, senhaRemetente);
 
-    setState(() {
-      hash = CriptografiaUtil.generateRandomHash(16);
-    });
+      setState(() {
+        hash = CriptografiaUtil.generateRandomHash(16);
+      });
 
-    final message = Message()
-      ..from = Address('bagagemsmart@gmail.com', 'Bagagem Smart')
-      ..recipients.add(destinatario)
-      ..subject = 'Redefinição de Senha'
-      ..text =
-          'Informe o código a seguir no aplicativo para poder redefinir sua senha:\n\n$hash';
+      final message = Message()
+        ..from = Address('bagagemsmart@gmail.com', 'Bagagem Smart')
+        ..recipients.add(destinatario)
+        ..subject = 'Redefinição de Senha'
+        ..text =
+            'Informe o código a seguir no aplicativo para poder redefinir sua senha:\n\n$hash';
 
-    try {
-      final sendReport = await send(message, smtpServer);
-      print('E-mail enviado: ${sendReport.toString()}');
-      _notify(context, 'Notificação',
-          'E-mail de redefinição de senha enviado para $destinatario');
-      liberarCamposParaInsercaoDoCodigo(context);
-    } catch (e) {
-      print('Erro ao enviar e-mail de redefinição de senha: $e');
-      _notify(
-          context, 'Erro', 'Erro ao enviar e-mail de redefinição de senha.');
+      try {
+        final sendReport = await send(message, smtpServer);
+        print('E-mail enviado: ${sendReport.toString()}');
+        _notify(context, 'Notificação',
+            'E-mail de redefinição de senha enviado para $destinatario');
+        liberarCamposParaInsercaoDoCodigo(context);
+      } catch (e) {
+        print('Erro ao enviar e-mail de redefinição de senha: $e');
+        _notify(
+            context, 'Erro', 'Erro ao enviar e-mail de redefinição de senha.');
+      }
+    } else {
+      _notify(context, 'Erro', 'O email informado não possui cadastro no Bagagem Smart.');
     }
   }
 
@@ -190,7 +196,7 @@ class _RecuperacaoConta extends State<RecuperacaoConta> {
                         emailInputValue.text = "";
                         codigoInputValue.text = "";
                       },
-                      child: Text('Gerar novo código'),
+                      child: const Text('Gerar novo código'),
                     ),
                   ),
                 ],

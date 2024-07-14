@@ -6,7 +6,8 @@ import '../model/usuario.dart';
 class UsuarioDao {
   Future<bool> cadastrarUsuario(Usuario usuario) async {
     try {
-      CollectionReference usuarios = FirebaseFirestore.instance.collection('usuarios');
+      CollectionReference usuarios =
+          FirebaseFirestore.instance.collection('usuarios');
       await usuarios.doc().set(usuario.toMap());
       return true;
     } catch (e) {
@@ -49,9 +50,18 @@ class UsuarioDao {
     return null;
   }
 
-  // bool? atualizarUsuario(Usuario usuario) {}
-  //
-  // bool? deletarUsuario(Usuario usuario) {}
+  isEmailCadastrado(email) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('usuarios')
+        .where('email', isEqualTo: email)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   Future<double?> lerPesoAssociadoAoUsuario(String id) async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -66,6 +76,20 @@ class UsuarioDao {
       return pesagem;
     } else {
       return null;
+    }
+  }
+
+  atualizarSenhaAssociadaAoEmail(String email, String senha) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('usuarios')
+        .where('email', isEqualTo: email)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
+      await documentSnapshot.reference.update({
+        'senha': senha,
+      });
     }
   }
 }

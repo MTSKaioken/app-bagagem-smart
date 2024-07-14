@@ -32,19 +32,13 @@ class UsuarioController {
     }
   }
 
+  Future<bool> isEmailCadastrado(String destinatario) async {
+    return await usuarioDao.isEmailCadastrado(destinatario);
+  }
+
   bool? atualizarUsuario(Usuario usuario) {}
 
   bool? deletarUsuario(Usuario usuario) {}
-
-  String? validarSenha(String? valueField) {
-    if (valueField == null) {
-      return null;
-    }
-
-    if (valueField.length < 4) {
-      return "precisa de ao menos 4 digitos!";
-    }
-  }
 
   String? validarEmail(String? valueField) {
     if (EmailValidator.validate(valueField!)) {
@@ -64,7 +58,11 @@ class UsuarioController {
       throw ValidationException("Email inválido!");
     }
 
-    if (senha.isEmpty) {
+    validarSenha(senha, senhaReptida);
+  }
+
+  void validarSenha(String senha, String senhaReptida) {
+     if (senha.isEmpty) {
       throw ValidationException("Informe a senha");
     }
 
@@ -90,5 +88,10 @@ class UsuarioController {
        return 0;
      }
   }
+
+  atualizarSenhaAssociadaAoEmail(String email, String senha) async {
+    await usuarioDao.atualizarSenhaAssociadaAoEmail(email, senha);
+  }
+
 
 }
