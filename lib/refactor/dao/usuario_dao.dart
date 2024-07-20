@@ -92,4 +92,20 @@ class UsuarioDao {
       });
     }
   }
+
+  lerCoordenadasAssociadoAoUsuario(String id) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('usuario_localizacoes')
+        .where('id_usuario', isEqualTo: id)
+        .orderBy('dt_localizacao', descending: true)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      GeoPoint localizacao = querySnapshot.docs.first['localizacao'];
+      return localizacao;
+    } else {
+      return null;
+    }
+
+  }
 }

@@ -1,6 +1,8 @@
 import 'package:bagagem_smart/refactor/exception/validation_exception.dart';
 import 'package:bagagem_smart/refactor/model/usuario.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../dao/usuario_dao.dart';
 
@@ -79,14 +81,26 @@ class UsuarioController {
     }
   }
 
-  Future<double> lerPesoAssociadoAoUsuario(String id) async {
-     double? pesagem = await usuarioDao.lerPesoAssociadoAoUsuario(id);
+  Future<LatLng> lerCoordenadasAssociadoAoUsuario(String id) async {
+     GeoPoint localizacao = await usuarioDao.lerCoordenadasAssociadoAoUsuario(id);
+     return LatLng(localizacao.latitude, localizacao.longitude);
+  }
 
-     if (pesagem != null) {
-       return pesagem;
-     } else {
-       return 0;
-     }
+
+  Future<double> lerPesoAssociadoAoUsuario(String id) async {
+    double? pesagem = await usuarioDao.lerPesoAssociadoAoUsuario(id);
+
+    if (pesagem != null) {
+      return pesagem;
+    } else {
+      return 0;
+    }
+  }
+
+  static LatLng buscarLatLong(){
+    double lat = -23.60044;
+    double lng = -46.43707;
+    return LatLng(lat, lng);
   }
 
   atualizarSenhaAssociadaAoEmail(String email, String senha) async {

@@ -1,5 +1,8 @@
+import 'package:bagagem_smart/refactor/controller/usuario_controller.dart';
+import 'package:bagagem_smart/refactor/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map/plugin_api.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../model/usuario.dart';
@@ -7,7 +10,17 @@ import 'component/balanca.dart';
 import 'component/navbar_lateral.dart';
 
 class Dashboard extends StatelessWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  UsuarioController usuarioController = UsuarioController();
+  MapController mapController = MapController();
+
+  LatLng latitudeLongitude = LatLng(0, 0);
+
+  Dashboard({Key? key}) : super(key: key);
+
+  Future<LatLng?> buscarUltimaLocalizacao(id) async {
+    LatLng latLng = await usuarioController.lerCoordenadasAssociadoAoUsuario(id);
+    return latLng;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +36,7 @@ class Dashboard extends StatelessWidget {
             backgroundColor: Colors.white,
             shadowColor: Colors.transparent,
             iconTheme: IconThemeData(
-              color: Colors.black, // Defina a cor desejada aqui
+              color: Colors.black,
             ),
           ),
           body: Center(
@@ -31,7 +44,6 @@ class Dashboard extends StatelessWidget {
               children: [
                 Icon(Icons.no_luggage_rounded),
                 Text('Dispositivo Conectado'),
-                // trocar por banner
                 Container(
                   child: Image.asset(
                     'lib/refactor/assets/banner-bagagem.jpg',
@@ -60,10 +72,8 @@ class Dashboard extends StatelessWidget {
                   children: [
                     Text(
                       'Sua Bagagem',
-                      style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold
-                      ),
+                      style:
+                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -76,14 +86,19 @@ class Dashboard extends StatelessWidget {
                           width: double.maxFinite,
                           height: 170,
                           child: FlutterMap(
+                            mapController: mapController,
                             options: MapOptions(
-                              center: LatLng(-23.60044, -46.43707),
-                              zoom: 17.0,
-                              interactiveFlags: 0
-                            ),
+                                onMapReady: () async =>  {
+                                  latitudeLongitude = (await buscarUltimaLocalizacao(usuario.idUsuario))!,
+                                  mapController.move(latitudeLongitude, mapController.zoom)
+                                },
+                                center: latitudeLongitude,
+                                zoom: 17.0,
+                                interactiveFlags: 0),
                             children: [
                               TileLayer(
-                                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                urlTemplate:
+                                    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                                 userAgentPackageName: 'org.example.app',
                               ),
                               MarkerLayer(
@@ -92,7 +107,8 @@ class Dashboard extends StatelessWidget {
                                     point: LatLng(-23.60044, -46.43707),
                                     width: 80,
                                     height: 80,
-                                    builder: (context) => Image.asset("lib/refactor/assets/localizacao-da-bagagem.png"),
+                                    builder: (context) => Image.asset(
+                                        "lib/refactor/assets/localizacao-da-bagagem.png"),
                                   ),
                                 ],
                               ),
