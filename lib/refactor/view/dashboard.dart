@@ -124,6 +124,7 @@ class _DashboardState extends State<Dashboard> {
                                 onMapReady: () async =>  {
                                   latitudeLongitude = (await buscarUltimaLocalizacao(usuario.idUsuario))!,
                                   await buscarNomeDaRegiaoPorLatitudeLongitude(latitudeLongitude.latitude, latitudeLongitude.longitude),
+
                                   mapController.move(latitudeLongitude, mapController.zoom)
                                 },
                                 center: latitudeLongitude,
@@ -138,7 +139,7 @@ class _DashboardState extends State<Dashboard> {
                               MarkerLayer(
                                 markers: [
                                   Marker(
-                                    point: LatLng(-23.60044, -46.43707),
+                                    point: latitudeLongitude,
                                     width: 80,
                                     height: 80,
                                     builder: (context) => Image.asset(
