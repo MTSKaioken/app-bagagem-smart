@@ -30,15 +30,14 @@ flutter build apk --dart-define=email-gmail-remetente='teste@teste.com' --dart-d
 
 ## WIP
 
+[ ] - melhorar parte relacionada ao status de conexão do dispositivo
 
+[ ] - tela de configurações, ajustar um timer (job) para atualização da localização e do peso.
 
 ## TODO
 
-[ ] - melhorar parte relacionada ao status de conexão do dispositivo
 
 [ ] - redefinição de senha a partir do menu lateral da dashboard
-
-[ ] - tela de configurações, ajustar um timer (job) para atualização da localização e do peso.
 
 [ ] - loading durante renderizações
 
