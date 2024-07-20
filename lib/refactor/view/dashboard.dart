@@ -1,15 +1,21 @@
 import 'package:bagagem_smart/refactor/controller/usuario_controller.dart';
-import 'package:bagagem_smart/refactor/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../model/usuario.dart';
 import 'component/balanca.dart';
 import 'component/navbar_lateral.dart';
 
-class Dashboard extends StatelessWidget {
+
+class Dashboard extends StatefulWidget {
+  @override
+  _DashboardState createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   UsuarioController usuarioController = UsuarioController();
   MapController mapController = MapController();
 
@@ -20,11 +26,32 @@ class Dashboard extends StatelessWidget {
      'municipioPais': '',
    };
 
-  Dashboard({Key? key}) : super(key: key);
-
   Future<LatLng?> buscarUltimaLocalizacao(id) async {
     LatLng latLng = await usuarioController.lerCoordenadasAssociadoAoUsuario(id);
     return latLng;
+  }
+
+  Future<void> buscarNomeDaRegiaoPorLatitudeLongitude(double latitude, double longitude) async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude, localeIdentifier: "pt_BR");
+
+      if (placemarks != null && placemarks.isNotEmpty) {
+        Placemark placemark = placemarks[0];
+        setState(() {
+          nomeLocalizacao['ruaBairro'] = '${placemark.street}, ${placemark.subLocality}';
+          nomeLocalizacao['municipioPais'] = '${placemark.administrativeArea}, ${placemark.subAdministrativeArea} / ${placemark.country == 'Brazil' ?  'Brasil' : placemark.country}';
+        });
+      } else {
+        setState(() {
+          nomeLocalizacao['ruaBairro'] = 'Localização não encontrada';
+        });
+      }
+    } catch (e) {
+      print('Erro ao obter a localização: $e');
+      setState(() {
+        nomeLocalizacao['ruaBairro'] = 'Erro ao obter a localização';
+      });
+    }
   }
 
   @override
@@ -96,6 +123,7 @@ class Dashboard extends StatelessWidget {
                             options: MapOptions(
                                 onMapReady: () async =>  {
                                   latitudeLongitude = (await buscarUltimaLocalizacao(usuario.idUsuario))!,
+                                  await buscarNomeDaRegiaoPorLatitudeLongitude(latitudeLongitude.latitude, latitudeLongitude.longitude),
                                   mapController.move(latitudeLongitude, mapController.zoom)
                                 },
                                 center: latitudeLongitude,
