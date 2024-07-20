@@ -30,7 +30,7 @@ class UsuarioController {
     if (usuario != null) {
       return usuario;
     } else {
-      throw ValidationException('Usuário não encontrado');
+      throw ValidationException('Email e/ou senha incorreto(s)!');
     }
   }
 
