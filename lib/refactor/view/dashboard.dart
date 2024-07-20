@@ -15,6 +15,11 @@ class Dashboard extends StatelessWidget {
 
   LatLng latitudeLongitude = LatLng(0, 0);
 
+   Map<String, String> nomeLocalizacao = {
+     'ruaBairro': 'Não identificado',
+     'municipioPais': '',
+   };
+
   Dashboard({Key? key}) : super(key: key);
 
   Future<LatLng?> buscarUltimaLocalizacao(id) async {
@@ -64,10 +69,10 @@ class Dashboard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.location_on),
-                    Text('R. Ribeirão dos Arcos, Jardim Roseli', style: TextStyle(fontSize: 14),),
+                    Text(nomeLocalizacao['ruaBairro']!, style: TextStyle(fontSize: 14),),
                   ],
                 ),
-                Text('São Paulo, São Paulo / Brasil', style: TextStyle(fontSize: 14),),
+                Text(nomeLocalizacao['municipioPais']!, style: TextStyle(fontSize: 14),),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
