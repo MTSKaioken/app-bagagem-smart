@@ -36,7 +36,7 @@ class _NomeLocalizacaoState extends State<NomeLocalizacao> {
       if (placemarks != null && placemarks.isNotEmpty) {
         Placemark placemark = placemarks[0];
         setState(() {
-          _locationName = '${placemark.street}, ${placemark.subLocality} - ${placemark.administrativeArea}, ${placemark.subLocality} / ${placemark.country}';
+          _locationName = '${placemark.street}, ${placemark.subLocality} - ${placemark.administrativeArea}, ${placemark.subAdministrativeArea} / ${placemark.country == 'Brazil' ?  'Brasil' : placemark.country}';
         });
       } else {
         setState(() {

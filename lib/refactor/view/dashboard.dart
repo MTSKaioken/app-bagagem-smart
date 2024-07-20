@@ -64,9 +64,10 @@ class Dashboard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.location_on),
-                    Text('São Paulo, Brazil'),
+                    Text('R. Ribeirão dos Arcos, Jardim Roseli', style: TextStyle(fontSize: 14),),
                   ],
                 ),
+                Text('São Paulo, São Paulo / Brasil', style: TextStyle(fontSize: 14),),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
