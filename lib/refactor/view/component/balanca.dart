@@ -99,7 +99,7 @@ class _Balanca extends State<Balanca> with SingleTickerProviderStateMixin {
                       });
                       progressController.forward();
                     } else {
-                      Util.notify(context, "Notificação", "Não foi possivel fazer a pesagem");
+                      Util.notify(context, "Notificação", "Nenhuma leitura encontrada!");
                     }
                   } else {
                     progressController.forward();
