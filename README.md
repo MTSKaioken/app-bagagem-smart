@@ -30,9 +30,7 @@ flutter build apk --dart-define=email-gmail-remetente='teste@teste.com' --dart-d
 
 ## WIP
 
-[ ] - buscar coordenadas associadas ao usuario no banco
 
-[ ] - buscar nome do lugar com base nas coordenadas associadas ao usuario
 
 ## TODO
 
@@ -70,6 +68,10 @@ flutter build apk --dart-define=email-gmail-remetente='teste@teste.com' --dart-d
 [x] - dialog alertando que não encontrou peso associado ao usuario
 
 [x] - bug onClick na balança
+
+[x] - buscar coordenadas associadas ao usuario no banco
+
+[x] - buscar nome do lugar com base nas coordenadas associadas ao usuario
 
 ## UTILS
 
