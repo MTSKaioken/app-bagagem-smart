@@ -30,6 +30,8 @@ flutter build apk --dart-define=email-gmail-remetente='teste@teste.com' --dart-d
 
 ## WIP
 
+[ ] - ajustar nome e icone do aplicativo
+
 [ ] - melhorar parte relacionada ao status de conexão do dispositivo
 
 [ ] - tela de configurações, ajustar um timer (job) para atualização da localização e do peso.
