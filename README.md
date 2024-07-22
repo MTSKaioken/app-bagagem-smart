@@ -90,3 +90,6 @@ referencia: https://pub.dev/packages/crypto
 
 [ ] - obj to json
 referencia: https://pub.dev/packages/json_serializable
+
+[ ] - job (cron)
+https://www.youtube.com/watch?v=3VvmplCs16I

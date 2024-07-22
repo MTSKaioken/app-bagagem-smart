@@ -38,6 +38,7 @@ dependencies:
   latlong2: ^0.8.1
   font_awesome_flutter: ^9.2.0
   mailer: ^6.1.1
+  cron: ^0.5.0
   flutter_localizations:
     sdk: flutter
 
@@ -55,6 +56,12 @@ dev_dependencies:
   image_picker: ^0.8.4+2
   url_launcher: ^6.0.10
   responsive_builder: ^0.7.0
+  flutter_launcher_icons: ^0.10.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "lib/refactor/assets/luggage.png"
 
 
   # The "flutter_lints" package below contains a set of recommended lints to

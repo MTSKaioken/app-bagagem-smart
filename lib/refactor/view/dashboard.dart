@@ -1,4 +1,5 @@
 import 'package:bagagem_smart/refactor/controller/usuario_controller.dart';
+import 'package:cron/cron.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
@@ -16,6 +17,8 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+
+  final cron = Cron();
   UsuarioController usuarioController = UsuarioController();
   MapController mapController = MapController();
 
@@ -122,9 +125,9 @@ class _DashboardState extends State<Dashboard> {
                             mapController: mapController,
                             options: MapOptions(
                                 onMapReady: () async =>  {
+                                  executarJob(),
                                   latitudeLongitude = (await buscarUltimaLocalizacao(usuario.idUsuario))!,
                                   await buscarNomeDaRegiaoPorLatitudeLongitude(latitudeLongitude.latitude, latitudeLongitude.longitude),
-
                                   mapController.move(latitudeLongitude, mapController.zoom)
                                 },
                                 center: latitudeLongitude,
@@ -159,5 +162,11 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
         ));
+  }
+
+  void executarJob() async {
+    cron.schedule(Schedule.parse('0 * * * * * '), () async {
+      print("executando job ás: " + DateTime.now().toString());
+    });
   }
 }
