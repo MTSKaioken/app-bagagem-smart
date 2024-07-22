@@ -125,7 +125,7 @@ class _DashboardState extends State<Dashboard> {
                             mapController: mapController,
                             options: MapOptions(
                                 onMapReady: () async =>  {
-                                  executarJob(),
+                                  executarJob(usuario.idUsuario),
                                   latitudeLongitude = (await buscarUltimaLocalizacao(usuario.idUsuario))!,
                                   await buscarNomeDaRegiaoPorLatitudeLongitude(latitudeLongitude.latitude, latitudeLongitude.longitude),
                                   mapController.move(latitudeLongitude, mapController.zoom)
@@ -164,9 +164,12 @@ class _DashboardState extends State<Dashboard> {
         ));
   }
 
-  void executarJob() async {
+  void executarJob(idUsuario) async {
     cron.schedule(Schedule.parse('0 * * * * * '), () async {
       print("executando job ás: " + DateTime.now().toString());
+      latitudeLongitude = (await buscarUltimaLocalizacao(idUsuario))!;
+      mapController.move(latitudeLongitude, mapController.zoom);
+      await buscarNomeDaRegiaoPorLatitudeLongitude(latitudeLongitude.latitude, latitudeLongitude.longitude);
     });
   }
 }
