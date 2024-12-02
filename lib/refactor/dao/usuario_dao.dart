@@ -93,6 +93,22 @@ class UsuarioDao {
     }
   }
 
+  atualizarUsuario(Usuario usuario) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('usuarios')
+        .where('email', isEqualTo: usuario.email)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
+      await documentSnapshot.reference.update({
+        'dt_nascimento': usuario.dtNascimento,
+        'nome': usuario.nome,
+        'imagem_perfil_base64': usuario.imagemPerfilBase64
+      });
+    }
+  }
+
   lerCoordenadasAssociadoAoUsuario(String id) async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('usuario_localizacoes')

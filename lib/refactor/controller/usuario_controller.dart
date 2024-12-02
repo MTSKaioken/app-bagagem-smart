@@ -38,7 +38,9 @@ class UsuarioController {
     return await usuarioDao.isEmailCadastrado(destinatario);
   }
 
-  bool? atualizarUsuario(Usuario usuario) {}
+  atualizarUsuario(Usuario usuario) async {
+    await usuarioDao.atualizarUsuario(usuario);
+  }
 
   bool? deletarUsuario(Usuario usuario) {}
 

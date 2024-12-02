@@ -83,14 +83,7 @@ class _EditarPerfil extends State<EditarPerfil> {
           dtNascimento: dtNascimentoInputValue.text,
           imagemPerfilBase64: imagemPerfilBase64);
 
-      usuarioController.isCadastroValido(
-        nomeInputValue.text,
-        emailInputValue.text,
-        senhaInputValue.text,
-        senhaRepetidaInputValue.text,
-      );
-
-      await usuarioController.cadastrarUsuario(usuario);
+      await usuarioController.atualizarUsuario(usuario);
       _notify(context, "Notificação", "Atualizado com sucesso!");
     } on ValidationException catch (e) {
       _notify(context, "Notificação", e.getMessage());
