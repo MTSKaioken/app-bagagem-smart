@@ -9,9 +9,10 @@ class ProfileImagePicker extends StatefulWidget {
 
   final Function(String?)? setImage;
 
-  final String? imagemInicial;
+  late String? imagemInicial;
 
-  ProfileImagePicker({Key? key, required this.onSelected, this.setImage, this.imagemInicial})
+  ProfileImagePicker(
+      {Key? key, required this.onSelected, this.setImage, this.imagemInicial})
       : super(key: key);
 
   @override
@@ -22,7 +23,6 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   final ImagePicker _imagePicker = ImagePicker();
   PickedFile? _pickedImage;
   String? encodedImage;
-
   ImageProvider? imagemSelecionada;
 
   Future<void> setImage(String base64) async {
@@ -31,9 +31,9 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
     });
   }
 
-  Future<void> _getImage() async {
+  Future<void> openPicker() async {
     final pickedImage =
-        await _imagePicker.getImage(source: ImageSource.gallery);
+    await _imagePicker.getImage(source: ImageSource.gallery);
     encodedImage = await pickedImageToBase64(pickedImage!.path);
     await widget.onSelected(encodedImage);
 
@@ -66,14 +66,12 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
       });
     } else {
       setState(() {
-        // Sem imagem (nula)
         imagemSelecionada = null;
       });
     }
   }
 
   Widget circleAvatar(BuildContext context) {
-
     _getBackgroundImage(widget.imagemInicial);
 
     return CircleAvatar(
@@ -91,14 +89,18 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                   setState(() {
                     _pickedImage = null;
                   });
+                } else if (imagemSelecionada != null) {
+                  setState(() {
+                    widget.imagemInicial = null;
+                    imagemSelecionada = null;
+                  });
                 } else {
-                  _getImage();
+                  openPicker();
                 }
               },
-              child: Icon(
-                _pickedImage == null
-                    ? FontAwesomeIcons.plusCircle
-                    : FontAwesomeIcons.minusCircle,
+              child: Icon(imagemSelecionada == null
+                  ? FontAwesomeIcons.plusCircle
+                  : FontAwesomeIcons.minusCircle,
                 color: Colors.black,
                 size: 30,
               ),
@@ -114,10 +116,10 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
     return Column(
       children: <Widget>[
         InkWell(
-          onTap: _getImage,
+          onTap: openPicker,
           hoverColor: Colors.pink,
           onHover: (value) {
-            _getImage();
+            openPicker();
           },
           child: circleAvatar(context),
         ),

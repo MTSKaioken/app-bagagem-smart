@@ -112,8 +112,6 @@ class _EditarPerfil extends State<EditarPerfil> {
     }
   }
 
-  void setarBase64ImagemPerfil() {}
-
   carregarDadosDoUsuario(BuildContext context, Usuario usuarioLogado) {
     idUsuarioValue.text = usuarioLogado.idUsuario;
     nomeInputValue.text = usuarioLogado.nome;
@@ -121,9 +119,6 @@ class _EditarPerfil extends State<EditarPerfil> {
     emailInputValue.text = usuarioLogado.email;
     senhaInputValue.text = usuarioLogado.senha;
     senhaRepetidaInputValue.text = usuarioLogado.senha;
-    _filhoKey.currentState?.widget
-        .createState()
-        .setImage(usuarioLogado.imagemPerfilBase64 ?? "");
   }
 
   @override
