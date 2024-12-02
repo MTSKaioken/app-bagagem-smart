@@ -5,13 +5,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileImagePicker extends StatefulWidget {
-
   final Function(String?) onSelected;
 
   final Function(String?)? setImage;
 
+  final String? imagemInicial;
 
-  ProfileImagePicker({Key? key, required this.onSelected, this.setImage}) : super(key: key);
+  ProfileImagePicker({Key? key, required this.onSelected, this.setImage, this.imagemInicial})
+      : super(key: key);
 
   @override
   _ProfileImagePickerState createState() => _ProfileImagePickerState();
@@ -20,21 +21,21 @@ class ProfileImagePicker extends StatefulWidget {
 class _ProfileImagePickerState extends State<ProfileImagePicker> {
   final ImagePicker _imagePicker = ImagePicker();
   PickedFile? _pickedImage;
-
   String? encodedImage;
 
-  Future<void> setImage(String base64) async{
-    PickedFile pickedImage = PickedFile("/data/user/0/br.com.unip.tcc.bagagem_smart/cache/1662db9f-fb57-4ea6-b277-2f49ee8af346/1000000033.jpg");
+  ImageProvider? imagemSelecionada;
+
+  Future<void> setImage(String base64) async {
     setState(() {
-      _pickedImage = pickedImage;
+      encodedImage = base64;
     });
   }
 
   Future<void> _getImage() async {
-    final pickedImage = await _imagePicker.getImage(source: ImageSource.gallery);
+    final pickedImage =
+        await _imagePicker.getImage(source: ImageSource.gallery);
     encodedImage = await pickedImageToBase64(pickedImage!.path);
     await widget.onSelected(encodedImage);
-
 
     if (pickedImage != null) {
       setState(() {
@@ -52,13 +53,64 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
     return base64Image;
   }
 
+
+  void _getBackgroundImage(String? base64) {
+    if (_pickedImage != null) {
+      setState(() {
+        imagemSelecionada =
+            FileImage(File.fromUri(Uri.file(_pickedImage!.path)));
+      });
+    } else if (base64 != null && base64!.isNotEmpty) {
+      setState(() {
+        imagemSelecionada = MemoryImage(base64Decode(base64!));
+      });
+    } else {
+      setState(() {
+        // Sem imagem (nula)
+        imagemSelecionada = null;
+      });
+    }
+  }
+
+  Widget circleAvatar(BuildContext context) {
+
+    _getBackgroundImage(widget.imagemInicial);
+
+    return CircleAvatar(
+      radius: 60,
+      backgroundColor: Colors.grey,
+      backgroundImage: imagemSelecionada,
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: InkWell(
+              onTap: () {
+                if (_pickedImage != null) {
+                  setState(() {
+                    _pickedImage = null;
+                  });
+                } else {
+                  _getImage();
+                }
+              },
+              child: Icon(
+                _pickedImage == null
+                    ? FontAwesomeIcons.plusCircle
+                    : FontAwesomeIcons.minusCircle,
+                color: Colors.black,
+                size: 30,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    // PickedFile pickedImage = PickedFile("/data/user/0/br.com.unip.tcc.bagagem_smart/cache/1662db9f-fb57-4ea6-b277-2f49ee8af346/1000000033.jpg");
-    setState(() {
-      // _pickedImage = pickedImage;
-    });
-
     return Column(
       children: <Widget>[
         InkWell(
@@ -67,38 +119,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
           onHover: (value) {
             _getImage();
           },
-          child: CircleAvatar(
-            radius: 60,
-            backgroundColor: Colors.grey,
-            backgroundImage: _pickedImage != null
-                ? FileImage(File.fromUri(Uri.file(_pickedImage!.path)))
-                : null,
-            child: Stack(
-              children: <Widget>[
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: InkWell(
-                    onTap: () {
-                      if(_pickedImage != null){
-                        setState(() {
-                          _pickedImage = null;
-                        });
-                      } else {
-                        _getImage();
-                      }
-                    },
-                    child: Icon(
-                      _pickedImage == null ? FontAwesomeIcons.plusCircle : FontAwesomeIcons.minusCircle,
-                      color: Colors.black,
-                      size: 30,
-
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          child: circleAvatar(context),
         ),
       ],
     );

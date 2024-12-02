@@ -7,7 +7,6 @@ import 'package:bagagem_smart/refactor/view/component/profile_image_picker.dart'
 import '../controller/usuario_controller.dart';
 import '../model/usuario.dart';
 import '../util/util.dart';
-import 'component/profile_image_picker.dart';
 
 class EditarPerfil extends StatefulWidget {
   @override
@@ -115,7 +114,7 @@ class _EditarPerfil extends State<EditarPerfil> {
 
   void setarBase64ImagemPerfil() {}
 
-  carregarDadosDoUsuario(Usuario usuarioLogado) {
+  carregarDadosDoUsuario(BuildContext context, Usuario usuarioLogado) {
     idUsuarioValue.text = usuarioLogado.idUsuario;
     nomeInputValue.text = usuarioLogado.nome;
     dtNascimentoInputValue.text = usuarioLogado.dtNascimento;
@@ -131,7 +130,7 @@ class _EditarPerfil extends State<EditarPerfil> {
   Widget build(BuildContext context) {
     final Usuario usuario =
         ModalRoute.of(context)!.settings.arguments as Usuario;
-    carregarDadosDoUsuario(usuario);
+    carregarDadosDoUsuario(context, usuario);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -159,6 +158,7 @@ class _EditarPerfil extends State<EditarPerfil> {
                 children: [
                   ProfileImagePicker(
                     key: _filhoKey,
+                    imagemInicial: usuario.imagemPerfilBase64,
                     onSelected: (image) {
                       imagemPerfilBase64 = image;
                     },
@@ -198,7 +198,10 @@ class _EditarPerfil extends State<EditarPerfil> {
                   ),
                   TextField(
                     controller: emailInputValue,
+                    enabled: false,
                     decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.blueGrey[100],
                         labelText: 'Email',
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.mail)),
@@ -211,7 +214,10 @@ class _EditarPerfil extends State<EditarPerfil> {
                     child: TextFormField(
                       controller: senhaInputValue,
                       obscureText: !isPasswordVisible,
+                      enabled: false,
                       decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.blueGrey[100],
                         labelText: 'Senha',
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.password),
@@ -228,8 +234,11 @@ class _EditarPerfil extends State<EditarPerfil> {
                     child: TextFormField(
                       controller: senhaRepetidaInputValue,
                       obscureText: !isPasswordConfirmationVisible,
+                      enabled: false,
                       decoration: InputDecoration(
                           labelText: 'Confirmar senha',
+                          filled: true,
+                          fillColor: Colors.blueGrey[100],
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(Icons.password),
                           suffixIcon: BtnShowHidePassword(
