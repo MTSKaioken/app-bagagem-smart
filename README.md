@@ -2,6 +2,10 @@
 
 projeto para o trabalho de conclusão de curso
 
+## Stack utilizada
+ - Dart SDK version: 3.1.3
+ - Flutter 3.13.6
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
