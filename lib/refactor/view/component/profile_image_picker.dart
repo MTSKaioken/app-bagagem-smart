@@ -63,10 +63,12 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
     } else if (base64 != null && base64!.isNotEmpty) {
       setState(() {
         imagemSelecionada = MemoryImage(base64Decode(base64!));
+        widget.onSelected(base64);
       });
     } else {
       setState(() {
         imagemSelecionada = null;
+        widget.onSelected(null);
       });
     }
   }

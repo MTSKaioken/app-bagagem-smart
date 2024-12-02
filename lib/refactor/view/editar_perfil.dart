@@ -65,7 +65,7 @@ class _EditarPerfil extends State<EditarPerfil> {
           cancelButton: CupertinoActionSheetAction(
             child: Text('OK'),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, '/login');
             },
           ),
         );
