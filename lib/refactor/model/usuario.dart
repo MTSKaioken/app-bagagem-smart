@@ -15,7 +15,8 @@ class Usuario {
       nome: snapshot['nome'],
       email: snapshot['email'],
       dtNascimento: snapshot['dt_nascimento'],
-      imagemPerfilBase64: snapshot['imagem_perfil_base64']
+      imagemPerfilBase64: snapshot['imagem_perfil_base64'],
+      senha: snapshot['senha']
     );
   }
 

@@ -58,20 +58,22 @@ class NavbarLateral extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.edit_square),
             title: Text('Editar seu perfil'),
-            onTap: () => {},
-          ),
-          ListTile(
-            leading: Icon(Icons.verified_user),
-            title: Text('Informações'),
             onTap: () => {
-              Navigator.pushNamed(parentContext, "/localizacao")
+              Navigator.pushNamed(parentContext, "/editar", arguments: usuarioLogado)
             },
           ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Configurações'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.verified_user),
+          //   title: Text('Informações'),
+          //   onTap: () => {
+          //     Navigator.pushNamed(parentContext, "/localizacao")
+          //   },
+          // ),
+          // ListTile(
+          //   leading: Icon(Icons.settings),
+          //   title: Text('Configurações'),
+          //   onTap: () => {Navigator.of(context).pop()},
+          // ),
           ListTile(
             leading: Icon(Icons.border_color),
             title: Text('Termos & Condições'),

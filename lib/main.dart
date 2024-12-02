@@ -11,7 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
+import 'package:bagagem_smart/refactor/view/editar_perfil.dart';
 import 'refactor/view/nova_senha.dart';
 
 void main() async {
@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
         '/recuperacao': (context) => RecuperacaoConta(),
         '/dashboard/maps': (context) => DashboardMaps(),
         '/dashboard': (context) => Dashboard(),
+        '/editar': (context) => EditarPerfil(),
         '/politica/privacidade': (context) => PoliticaDePrivacidade(),
         '/politica/condicoes': (context) => TermosAndCondicoes(),
         '/localizacao': (context) => NomeLocalizacao(),

@@ -42,6 +42,8 @@ flutter build apk --dart-define=email-gmail-remetente='teste@teste.com' --dart-d
 
 ## TODO
 
+[ ] - versão em tempo de compilação para ser apresentada em baixo da logo do app
+
 
 [ ] - redefinição de senha a partir do menu lateral da dashboard
 

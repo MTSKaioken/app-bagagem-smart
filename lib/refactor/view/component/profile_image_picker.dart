@@ -8,7 +8,10 @@ class ProfileImagePicker extends StatefulWidget {
 
   final Function(String?) onSelected;
 
-  ProfileImagePicker({required this.onSelected});
+  final Function(String?)? setImage;
+
+
+  ProfileImagePicker({Key? key, required this.onSelected, this.setImage}) : super(key: key);
 
   @override
   _ProfileImagePickerState createState() => _ProfileImagePickerState();
@@ -19,6 +22,13 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   PickedFile? _pickedImage;
 
   String? encodedImage;
+
+  Future<void> setImage(String base64) async{
+    PickedFile pickedImage = PickedFile("/data/user/0/br.com.unip.tcc.bagagem_smart/cache/1662db9f-fb57-4ea6-b277-2f49ee8af346/1000000033.jpg");
+    setState(() {
+      _pickedImage = pickedImage;
+    });
+  }
 
   Future<void> _getImage() async {
     final pickedImage = await _imagePicker.getImage(source: ImageSource.gallery);
@@ -44,6 +54,11 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
 
   @override
   Widget build(BuildContext context) {
+    // PickedFile pickedImage = PickedFile("/data/user/0/br.com.unip.tcc.bagagem_smart/cache/1662db9f-fb57-4ea6-b277-2f49ee8af346/1000000033.jpg");
+    setState(() {
+      // _pickedImage = pickedImage;
+    });
+
     return Column(
       children: <Widget>[
         InkWell(
@@ -77,6 +92,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                       _pickedImage == null ? FontAwesomeIcons.plusCircle : FontAwesomeIcons.minusCircle,
                       color: Colors.black,
                       size: 30,
+
                     ),
                   ),
                 ),
